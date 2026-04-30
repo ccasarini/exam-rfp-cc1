@@ -44,46 +44,34 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        // 7. Load the Haiti GeoJSON data
-        // We use 'fetch' to grab the file we downloaded earlier
-        fetch('haiti_borders/hti_admin1.geojson')
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(data) {
-                // 8. Add the shapes to the map
+        // 7. Load the Haiti Landmass (Admin 0)
+        fetch('haiti_borders/hti_admin0.geojson')
+            .then(res => res.json())
+            .then(data => {
                 L.geoJSON(data, {
-                    style: function(feature) {
-                        return {
-                            color: "#003366", // Dark blue border
-                            weight: 2,
-                            fillColor: "#6699ff", // Light blue fill
-                            fillOpacity: 0.5
-                        };
-                    },
-                    onEachFeature: function (feature, layer) {
-                        // 9. Add a popup that appears when you click a department
-                        if (feature.properties && feature.properties.ADM1_FR) {
-                            layer.bindPopup("<strong>Department:</strong> " + feature.properties.ADM1_FR + 
-                                            "<br><strong>P-Code:</strong> " + feature.properties.ADM1_PCODE);
-                        }
-                        
-                        // Highlight the department when the mouse hovers over it
-                        layer.on({
-                            mouseover: function(e) {
-                                var layer = e.target;
-                                layer.setStyle({ weight: 5, fillOpacity: 0.7 });
-                            },
-                            mouseout: function(e) {
-                                geojsonLayer.resetStyle(e.target);
-                            }
-                        });
+                    style: {
+                        color: "none",      // No border
+                        fillColor: "#d1d1d1", // Light grey landmass
+                        fillOpacity: 0.8
                     }
                 }).addTo(map);
-                
-                // We store the layer so we can reset its style later
-                var geojsonLayer = L.geoJSON(data).addTo(map);
-                geojsonLayer.clearLayers(); // Clean up temp storage
+            });
+
+        // 8. Load the Administrative Lines (to show ONLY the land border)
+        fetch('haiti_borders/hti_adminlines.geojson')
+            .then(res => res.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    filter: function(feature) {
+                        // Only show the international land border (adm_level 0)
+                        // This effectively "deletes" the sea borders (adm_level 99)
+                        return feature.properties.adm_level === 0;
+                    },
+                    style: {
+                        color: "#333", // Dark line for the land border
+                        weight: 3
+                    }
+                }).addTo(map);
             })
             .catch(function(error) {
                 console.log("Error loading the JSON file: " + error);
