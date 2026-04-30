@@ -53,8 +53,8 @@
         var haitiStyle = {
             color: "#666",        // Neutral grey border
             weight: 1.5,
-            fillColor: "#d1d1d1", // Pale grey
-            fillOpacity: 0.4
+            fillColor: "#c8e6c9", // Pale Green
+            fillOpacity: 0.5
         };
 
         var paupStyle = {
@@ -84,7 +84,11 @@
                 .then(res => res.json())
                 .then(data => {
                     currentLayer = L.geoJSON(data, { style: haitiStyle }).addTo(map);
-                    map.fitBounds(currentLayer.getBounds(), { padding: [20, 20] });
+                    // Use flyToBounds for fluid movement
+                    map.flyToBounds(currentLayer.getBounds(), { 
+                        padding: [20, 20],
+                        duration: 1.5 // Seconds the animation takes
+                    });
                 });
             
             document.getElementById('project-button').innerHTML = "click here to see the project";
@@ -98,7 +102,11 @@
                 .then(res => res.json())
                 .then(data => {
                     currentLayer = L.geoJSON(data, { style: paupStyle }).addTo(map);
-                    map.fitBounds(currentLayer.getBounds(), { padding: [80, 80] });
+                    // Use flyToBounds for fluid movement
+                    map.flyToBounds(currentLayer.getBounds(), { 
+                        padding: [80, 80],
+                        duration: 1.5 
+                    });
                 });
             
             document.getElementById('project-button').innerHTML = "back to national map";
