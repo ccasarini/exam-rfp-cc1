@@ -85,7 +85,7 @@
         function showHaiti() {
             if (currentLayer) map.removeLayer(currentLayer);
             
-            fetch('haiti_borders/hti_admin0.geojson')
+            fetch('haiti_borders/geojson/hti_admin0.geojson')
                 .then(res => res.json())
                 .then(data => {
                     currentLayer = L.geoJSON(data, { style: haitiStyle }).addTo(map);
@@ -107,7 +107,7 @@
         function showProject() {
             if (currentLayer) map.removeLayer(currentLayer);
             
-            fetch('haiti_borders/port_au_prince.geojson')
+            fetch('haiti_borders/geojson/port_au_prince.geojson')
                 .then(res => res.json())
                 .then(data => {
                     currentLayer = L.geoJSON(data, { style: paupStyle }).addTo(map);

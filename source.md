@@ -11,4 +11,4 @@ These coordinates are essential for rendering the interactive Haiti map required
 - **Admin Level 2:** Arrondissements
 - **Admin Level 3:** Communes
 
-The files are stored in GeoJSON format within the `haiti_borders/` directory and are used to provide the spatial framework for the application's mapping components.
+The files are stored in GeoJSON format within the `haiti_borders/geojson/` directory and are used to provide the spatial framework for the application's mapping components.
