@@ -51,10 +51,10 @@ def fetch_haiti_border():
             
             for element in data.get('elements', []):
                 if element['type'] == 'relation':
-                    # A country border is often made of many segments (lines).
-                    # We collect all these segments.
+                    # A country border is made of many segments (ways).
+                    # We only want the lines (ways), not points (nodes) like capitals.
                     for member in element.get('members', []):
-                        if 'geometry' in member:
+                        if member.get('type') == 'way' and 'geometry' in member:
                             coordinates = [[p['lon'], p['lat']] for p in member['geometry']]
                             geojson['features'].append({
                                 "type": "Feature",
@@ -63,7 +63,7 @@ def fetch_haiti_border():
                                     "coordinates": coordinates
                                 },
                                 "properties": {
-                                    "name": "Haiti Border Segment"
+                                    "role": member.get('role', 'outer')
                                 }
                             })
             
