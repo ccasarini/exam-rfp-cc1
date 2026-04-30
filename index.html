@@ -43,22 +43,22 @@
             maxZoom: 20
         }).addTo(map);
 
-        // 7. Load the Haiti National Border (Admin 0)
-        fetch('haiti_borders/hti_admin0.geojson')
+        // 7. Load the Port-au-Prince City Boundary
+        fetch('haiti_borders/port_au_prince.geojson')
             .then(res => res.json())
             .then(data => {
-                var boundaryLayer = L.geoJSON(data, {
+                var cityLayer = L.geoJSON(data, {
                     style: {
-                        color: "#333",
-                        weight: 2,
-                        fillColor: "#6699ff",
-                        fillOpacity: 0.3
+                        color: "#e63946",   // Red border for the city
+                        weight: 3,
+                        fillColor: "#e63946", 
+                        fillOpacity: 0.2
                     }
                 }).addTo(map);
 
-                // 8. AUTOMATIC ZOOM: Make the map fit Haiti perfectly
-                map.fitBounds(boundaryLayer.getBounds(), {
-                    padding: [20, 20] // Adds a small margin around the borders
+                // 8. AUTOMATIC ZOOM: Make the map fit Port-au-Prince perfectly
+                map.fitBounds(cityLayer.getBounds(), {
+                    padding: [50, 50] // Margin so the city isn't touching the edges
                 });
             })
             .catch(err => console.log("Error: " + err));
