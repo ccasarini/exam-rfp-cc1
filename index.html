@@ -3,43 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haiti Border - Simple Map</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <title>Haiti Border Map</title>
+    
+    <!-- 1. Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; background: white; }
-        #map { width: 100%; height: 100vh; background: white; }
-        .leaflet-control-attribution { display: none; }
+        /* 2. Style the map to fill the whole screen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+
+    <!-- 3. The container for our map -->
     <div id="map"></div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <div class="info-panel">
+        <h3>Haiti Border Map</h3>
+        <p>Data from OpenStreetMap</p>
+    </div>
+
+    <!-- 4. Include Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
 
     <script>
-        // Create the map without background images or controls
-        var map = L.map('map', {
-            zoomControl: false,
-            attributionControl: false
-        });
+        // 5. Initialize the map
+        // We set the view to Haiti's general coordinates (lat: 18.9, lng: -72.7) 
+        // and a zoom level of 7.
+        var map = L.map('map').setView([18.9, -72.7], 7);
 
-        // Load the GeoJSON file (the ordered geometry)
-        fetch('haiti_borders.json')
-            .then(response => response.json())
-            .then(data => {
-                // Add the border to the map
-                var border = L.geoJSON(data, {
+        // 6. Add a "Base Layer" - This is the actual map image.
+        // We use OpenStreetMap's standard style.
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // 7. Load our GeoJSON file (the border we downloaded)
+        fetch('haiti_border.geojson')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                // Add the GeoJSON to the map with some styling
+                var borderLayer = L.geoJSON(data, {
                     style: {
-                        color: 'black',
-                        weight: 2,
-                        fillOpacity: 0
+                        color: "#e74c3c", // Red border
+                        weight: 4,        // Thickness
+                        opacity: 0.7,     // Transparency of line
+                        fillOpacity: 0.1, // Transparency of fill
+                        fillColor: "#e74c3c"
                     }
                 }).addTo(map);
 
-                // Zoom the map to fit the border
-                map.fitBounds(border.getBounds());
+                // 8. Automatically zoom the map to fit the border perfectly
+                map.fitBounds(borderLayer.getBounds());
             })
-            .catch(error => console.error('Error loading the map data:', error));
+            .catch(function(error) {
+                console.error('Error loading GeoJSON:', error);
+            });
     </script>
 </body>
 </html>
