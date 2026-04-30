@@ -37,11 +37,12 @@
         // [18.9, -72.3] are the coordinates, and 8 is the zoom level
         var map = L.map('map').setView([18.9712, -72.2852], 8);
 
-        // 6. Add a "Base Map" (The background images)
-        // We are using OpenStreetMap, which is free and open-source
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        // 6. Add a "Base Map" (Minimalist style without built-in borders)
+        // We use CartoDB Positron which is much cleaner for data visualization
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
         }).addTo(map);
 
         // 7. Load the Haiti National Border (Admin 0)
