@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Haiti Department Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 1. Leaflet CSS (The 'makeup' or styling for the map) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- 2. Leaflet JavaScript (The 'brains' of the map) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        /* 3. Make the map fill the entire browser window */
+        body { margin: 0; padding: 0; }
+        #map { height: 100vh; width: 100vw; }
+        
+        /* Style for the info box */
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 4. The container where the map will appear -->
+    <div id="map"></div>
+
+    <script>
+        // 5. Create the map and center it on Haiti
+        // [18.9, -72.3] are the coordinates, and 8 is the zoom level
+        var map = L.map('map').setView([18.9712, -72.2852], 8);
+
+        // 6. Add a "Base Map" (The background images)
+        // We are using OpenStreetMap, which is free and open-source
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // 7. Load the Haiti GeoJSON data
+        // We use 'fetch' to grab the file we downloaded earlier
+        fetch('haiti_borders/hti_admin1.geojson')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                // 8. Add the shapes to the map
+                L.geoJSON(data, {
+                    style: function(feature) {
+                        return {
+                            color: "#003366", // Dark blue border
+                            weight: 2,
+                            fillColor: "#6699ff", // Light blue fill
+                            fillOpacity: 0.5
+                        };
+                    },
+                    onEachFeature: function (feature, layer) {
+                        // 9. Add a popup that appears when you click a department
+                        if (feature.properties && feature.properties.ADM1_FR) {
+                            layer.bindPopup("<strong>Department:</strong> " + feature.properties.ADM1_FR + 
+                                            "<br><strong>P-Code:</strong> " + feature.properties.ADM1_PCODE);
+                        }
+                        
+                        // Highlight the department when the mouse hovers over it
+                        layer.on({
+                            mouseover: function(e) {
+                                var layer = e.target;
+                                layer.setStyle({ weight: 5, fillOpacity: 0.7 });
+                            },
+                            mouseout: function(e) {
+                                geojsonLayer.resetStyle(e.target);
+                            }
+                        });
+                    }
+                }).addTo(map);
+                
+                // We store the layer so we can reset its style later
+                var geojsonLayer = L.geoJSON(data).addTo(map);
+                geojsonLayer.clearLayers(); // Clean up temp storage
+            })
+            .catch(function(error) {
+                console.log("Error loading the JSON file: " + error);
+            });
+    </script>
+</body>
+</html>
