@@ -47,24 +47,48 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         }).addTo(map);
 
-        // 7. Load our GeoJSON file (the border we downloaded)
+        // 7. Load our GeoJSON file
         fetch('haiti_border.geojson')
             .then(function(response) {
                 return response.json();
             })
             .then(function(data) {
-                // Add the GeoJSON to the map with some styling
-                var borderLayer = L.geoJSON(data, {
-                    style: {
-                        color: "#000000", // Black border
-                        weight: 2,        // Thickness
-                        opacity: 1.0,     // Solid line
-                        fillOpacity: 0    // No fill (removes the "bubble" effect)
+                // We create different layers for the "Ribbon" effect
+                
+                // Layer 1: The Main Solid Line
+                var mainBorder = L.geoJSON(data, {
+                    style: function(feature) {
+                        return {
+                            color: "#333", 
+                            weight: 1.5,
+                            opacity: 1,
+                            fillOpacity: 0
+                        };
                     }
                 }).addTo(map);
 
-                // 8. Automatically zoom the map to fit the border perfectly
-                map.fitBounds(borderLayer.getBounds());
+                // Layer 2: The "Coastal Ribbon" (only for the coastline)
+                // We draw multiple lines with decreasing opacity and increasing width
+                var coastalFeatures = {
+                    "type": "FeatureCollection",
+                    "features": data.features.filter(f => f.properties.type === 'coastline')
+                };
+
+                // Add several layers to create a "fading out" water effect
+                [8, 15, 25].forEach(function(w, i) {
+                    L.geoJSON(coastalFeatures, {
+                        style: {
+                            color: "#2980b9", // Blue for the water edge
+                            weight: w,
+                            opacity: 0.15 - (i * 0.03),
+                            fillOpacity: 0,
+                            lineCap: 'round'
+                        }
+                    }).addTo(map);
+                });
+
+                // 8. Automatically zoom the map to fit
+                map.fitBounds(mainBorder.getBounds());
             })
             .catch(function(error) {
                 console.error('Error loading GeoJSON:', error);

@@ -19,12 +19,14 @@ HEADERS = {
 
 # This is the "Query". It's like a search command.
 # We are looking for:
-# - relation: A complex shape in OSM.
-# - ISO3166-1=HT: The international code for Haiti.
-# - admin_level=2: The country-level border.
+# - relation: The country border.
+# - coastline: The natural water/land boundary.
 QUERY = """
 [out:json][timeout:90];
-relation["ISO3166-1"="HT"]["admin_level"="2"];
+(
+  relation["ISO3166-1"="HT"]["admin_level"="2"];
+  way["natural"="coastline"](poly:"19.9 -74.5 20.1 -72.6 19.7 -71.5 18.0 -71.5 17.4 -74.5 19.9 -74.5");
+);
 out geom;
 """
 
@@ -51,21 +53,22 @@ def fetch_haiti_border():
             
             for element in data.get('elements', []):
                 if element['type'] == 'relation':
-                    # A country border is made of many segments (ways).
-                    # We only want the lines (ways), not points (nodes) like capitals.
                     for member in element.get('members', []):
                         if member.get('type') == 'way' and 'geometry' in member:
                             coordinates = [[p['lon'], p['lat']] for p in member['geometry']]
                             geojson['features'].append({
                                 "type": "Feature",
-                                "geometry": {
-                                    "type": "LineString",
-                                    "coordinates": coordinates
-                                },
-                                "properties": {
-                                    "role": member.get('role', 'outer')
-                                }
+                                "geometry": {"type": "LineString", "coordinates": coordinates},
+                                "properties": {"type": "border"}
                             })
+                elif element['type'] == 'way':
+                    if 'geometry' in element:
+                        coordinates = [[p['lon'], p['lat']] for p in element['geometry']]
+                        geojson['features'].append({
+                            "type": "Feature",
+                            "geometry": {"type": "LineString", "coordinates": coordinates},
+                            "properties": {"type": "coastline"}
+                        })
             
             if geojson['features']:
                 # Save the final data to a file
