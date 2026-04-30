@@ -33,9 +33,8 @@
     <div id="map"></div>
 
     <script>
-        // 5. Create the map and center it on the Caribbean
-        // Zoom level 7 shows Haiti, Dominican Republic, and neighbors for context
-        var map = L.map('map').setView([18.8, -71.5], 7);
+        // 5. Create the map (Initial view will be set automatically later)
+        var map = L.map('map');
 
         // 6a. Base Map Layer (The ground - No labels)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
@@ -48,14 +47,19 @@
         fetch('haiti_borders/hti_admin0.geojson')
             .then(res => res.json())
             .then(data => {
-                L.geoJSON(data, {
+                var boundaryLayer = L.geoJSON(data, {
                     style: {
                         color: "#333",
                         weight: 2,
                         fillColor: "#6699ff",
-                        fillOpacity: 0.3 // Lower opacity so labels can peek through
+                        fillOpacity: 0.3
                     }
                 }).addTo(map);
+
+                // 8. AUTOMATIC ZOOM: Make the map fit Haiti perfectly
+                map.fitBounds(boundaryLayer.getBounds(), {
+                    padding: [20, 20] // Adds a small margin around the borders
+                });
             })
             .catch(err => console.log("Error: " + err));
 
