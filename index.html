@@ -16,59 +16,105 @@
         body { margin: 0; padding: 0; }
         #map { height: 100vh; width: 100vw; }
         
-        /* Style for the info box */
-        .info {
-            padding: 6px 8px;
-            font: 14px/16px Arial, Helvetica, sans-serif;
-            background: white;
-            background: rgba(255,255,255,0.8);
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-            border-radius: 5px;
+        /* 4. Style the interactive button */
+        #project-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000; /* Ensures button stays above the map */
+            padding: 12px 24px;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        #project-button:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
         }
     </style>
 </head>
 <body>
 
-    <!-- 4. The container where the map will appear -->
+    <!-- 5. Add the Button and the Map container -->
+    <button id="project-button">click here to see the project</button>
     <div id="map"></div>
 
     <script>
-        // 5. Create the map (Initial view will be set automatically later)
         var map = L.map('map');
+        var currentLayer; // We use this to keep track of which shape is on the map
 
-        // 6a. Base Map Layer (The ground - No labels)
+        // 6. Define Pale/Neutral Styles
+        var haitiStyle = {
+            color: "#666",        // Neutral grey border
+            weight: 1.5,
+            fillColor: "#d1d1d1", // Pale grey
+            fillOpacity: 0.4
+        };
+
+        var paupStyle = {
+            color: "#4a90e2",     // Soft blue border
+            weight: 3,
+            fillColor: "#aec6cf", // Pale blue
+            fillOpacity: 0.5
+        };
+
+        // 7. Base Layers (Ground and Labels)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
             maxZoom: 20
         }).addTo(map);
 
-        // 7. Load the Haiti National Border (Admin 0)
-        fetch('haiti_borders/hti_admin0.geojson')
-            .then(res => res.json())
-            .then(data => {
-                var boundaryLayer = L.geoJSON(data, {
-                    style: {
-                        color: "#333",
-                        weight: 2,
-                        fillColor: "#6699ff",
-                        fillOpacity: 0.3
-                    }
-                }).addTo(map);
-
-                // 8. AUTOMATIC ZOOM: Make the map fit Haiti perfectly
-                map.fitBounds(boundaryLayer.getBounds(), {
-                    padding: [20, 20] // Adds a small margin around the borders
-                });
-            })
-            .catch(err => console.log("Error: " + err));
-
-        // 6b. Label Layer (The names - Stays on top of everything)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 20
         }).addTo(map);
+
+        // 8. Function to show Haiti (The initial view)
+        function showHaiti() {
+            if (currentLayer) map.removeLayer(currentLayer);
+            
+            fetch('haiti_borders/hti_admin0.geojson')
+                .then(res => res.json())
+                .then(data => {
+                    currentLayer = L.geoJSON(data, { style: haitiStyle }).addTo(map);
+                    map.fitBounds(currentLayer.getBounds(), { padding: [20, 20] });
+                });
+            
+            document.getElementById('project-button').innerHTML = "click here to see the project";
+        }
+
+        // 9. Function to show Port-au-Prince (The project view)
+        function showProject() {
+            if (currentLayer) map.removeLayer(currentLayer);
+            
+            fetch('haiti_borders/port_au_prince.geojson')
+                .then(res => res.json())
+                .then(data => {
+                    currentLayer = L.geoJSON(data, { style: paupStyle }).addTo(map);
+                    map.fitBounds(currentLayer.getBounds(), { padding: [80, 80] });
+                });
+            
+            document.getElementById('project-button').innerHTML = "back to national map";
+        }
+
+        // 10. Button Logic: Toggle between views
+        document.getElementById('project-button').onclick = function() {
+            if (this.innerHTML === "click here to see the project") {
+                showProject();
+            } else {
+                showHaiti();
+            }
+        };
+
+        // Start with Haiti view
+        showHaiti();
     </script>
 </body>
 </html>
