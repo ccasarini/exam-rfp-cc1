@@ -3,88 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haiti Border Map</title>
-    
-    <!-- 1. Leaflet Styles: This makes the map look like a map -->
+    <title>Haiti Border Only</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
     <style>
-        /* 2. Styling: Make the map fill the whole screen */
-        body, html { margin: 0; padding: 0; height: 100%; }
-        #map { width: 100%; height: 100vh; }
-        
-        .info-panel {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-            font-family: Arial, sans-serif;
-        }
+        body, html { margin: 0; padding: 0; height: 100%; background: white; }
+        #map { width: 100%; height: 100vh; background: white; }
+        /* Hide Leaflet attribution for a cleaner look */
+        .leaflet-control-attribution { display: none; }
     </style>
 </head>
 <body>
-
-    <div class="info-panel">
-        <h2 style="margin-top:0">Haiti Border Map</h2>
-        <p>Drawing coordinates from <code>haiti_borders.csv</code></p>
-    </div>
-
-    <!-- 3. The Map Container: Where the map will live -->
     <div id="map"></div>
 
-    <!-- 4. Leaflet Library: The code that handles the map -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- PapaParse: A small tool to help read CSV files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <script>
-        // 5. Initialize the map
-        // [18.9, -72.2] are coordinates near the center of Haiti
-        // 8 is the zoom level
-        var map = L.map('map').setView([18.9, -72.2], 8);
+        // Initialize map with a white background and no zoom controls for extra simplicity
+        var map = L.map('map', {
+            zoomControl: false,
+            attributionControl: false
+        }).setView([18.9, -72.2], 8);
 
-        // 6. Add "Tiles": The actual images of the world map
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
+        // We are NOT adding a tileLayer (the background map) to keep it "very simple"
 
-        // 7. Load and Process our CSV Data
         fetch('haiti_borders.csv')
             .then(response => response.text())
             .then(csvData => {
-                // Use PapaParse to turn the CSV text into a list of numbers
                 Papa.parse(csvData, {
                     header: true,
                     dynamicTyping: true,
                     complete: function(results) {
                         var borderPoints = [];
-                        
-                        // Convert each row into a Leaflet point [lat, lon]
                         results.data.forEach(function(row) {
                             if (row.latitude && row.longitude) {
                                 borderPoints.push([row.latitude, row.longitude]);
                             }
                         });
 
-                        // 8. Draw the Line: Connect all those points!
                         if (borderPoints.length > 0) {
                             var polyline = L.polyline(borderPoints, {
-                                color: 'red',
-                                weight: 3,
-                                opacity: 0.7
+                                color: 'black', // Changed to black for a classic outline look
+                                weight: 2,
+                                opacity: 1
                             }).addTo(map);
 
-                            // Automatically zoom the map to fit the whole border
                             map.fitBounds(polyline.getBounds());
                         }
                     }
                 });
-            })
-            .catch(error => console.error('Error loading the CSV:', error));
+            });
     </script>
 </body>
 </html>
