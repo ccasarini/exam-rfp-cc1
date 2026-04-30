@@ -46,37 +46,42 @@
     <div id="map"></div>
 
     <script>
-        var map = L.map('map');
-        var currentLayer; // We use this to keep track of which shape is on the map
+        // 5. Create the map and set a starting view near Haiti immediately
+        // This prevents the map from looking "lost" while data is loading
+        var map = L.map('map').setView([18.9, -72.3], 7);
+        var currentLayer;
+        var isFirstLoad = true; // Flag to handle the very first zoom differently
 
         // 6. Define Pale/Neutral Styles
         var haitiStyle = {
-            color: "#666",        // Neutral grey border
+            color: "#666",
             weight: 1.5,
             fillColor: "#c8e6c9", // Pale Green
             fillOpacity: 0.5
         };
 
         var paupStyle = {
-            color: "#4a90e2",     // Soft blue border
+            color: "#4a90e2",
             weight: 3,
             fillColor: "#aec6cf", // Pale blue
             fillOpacity: 0.5
         };
 
-        // 7. Base Layers (Ground and Labels)
+        // 7. Base Layers
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
             maxZoom: 20
         }).addTo(map);
 
+        // Labels layer on top
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
             subdomains: 'abcd',
-            maxZoom: 20
+            maxZoom: 20,
+            zIndex: 1000 // Ensure names stay on top
         }).addTo(map);
 
-        // 8. Function to show Haiti (The initial view)
+        // 8. Function to show Haiti
         function showHaiti() {
             if (currentLayer) map.removeLayer(currentLayer);
             
@@ -84,17 +89,21 @@
                 .then(res => res.json())
                 .then(data => {
                     currentLayer = L.geoJSON(data, { style: haitiStyle }).addTo(map);
-                    // Use flyToBounds for fluid movement
-                    map.flyToBounds(currentLayer.getBounds(), { 
-                        padding: [20, 20],
-                        duration: 1.5 // Seconds the animation takes
-                    });
+                    
+                    if (isFirstLoad) {
+                        // Instant zoom for the first time
+                        map.fitBounds(currentLayer.getBounds(), { padding: [20, 20] });
+                        isFirstLoad = false;
+                    } else {
+                        // Fluid flight for button clicks
+                        map.flyToBounds(currentLayer.getBounds(), { padding: [20, 20], duration: 1.5 });
+                    }
                 });
             
             document.getElementById('project-button').innerHTML = "click here to see the project";
         }
 
-        // 9. Function to show Port-au-Prince (The project view)
+        // 9. Function to show Port-au-Prince
         function showProject() {
             if (currentLayer) map.removeLayer(currentLayer);
             
@@ -102,11 +111,7 @@
                 .then(res => res.json())
                 .then(data => {
                     currentLayer = L.geoJSON(data, { style: paupStyle }).addTo(map);
-                    // Use flyToBounds for fluid movement
-                    map.flyToBounds(currentLayer.getBounds(), { 
-                        padding: [80, 80],
-                        duration: 1.5 
-                    });
+                    map.flyToBounds(currentLayer.getBounds(), { padding: [80, 80], duration: 1.5 });
                 });
             
             document.getElementById('project-button').innerHTML = "back to national map";
