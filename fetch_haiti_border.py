@@ -1,55 +1,55 @@
 import requests
-import csv
+import json
+import time
 
-# 1. Setup
-OVERPASS_URL = "https://overpass-api.de/api/interpreter"
-# Many APIs require a 'User-Agent' to know who is requesting the data.
+# 1. Setup - Using a different server that might be less busy
+OVERPASS_URLS = [
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass-api.de/api/interpreter"
+]
 HEADERS = {
     'User-Agent': 'HaitiBorderFetcher/1.0 (https://example.com/)'
 }
 
-# 2. The Query
-# We use ISO3166-1="HT" because it's a unique code for Haiti.
+# 2. The Query: Fetching the relation geometry directly
 QUERY = """
-[out:json];
+[out:json][timeout:90];
 relation["ISO3166-1"="HT"]["admin_level"="2"];
-(._;>;);
-out body;
+out geom;
 """
 
 def fetch_haiti_border():
-    print("Connecting to OpenStreetMap...")
-    
-    try:
-        # Send the request with headers
-        response = requests.post(OVERPASS_URL, data={'data': QUERY}, headers=HEADERS, timeout=60)
-        
-        # If we still get a 406, try GET instead of POST
-        if response.status_code == 406:
-            print("POST failed with 406, trying GET...")
-            response = requests.get(OVERPASS_URL, params={'data': QUERY}, headers=HEADERS, timeout=60)
+    for url in OVERPASS_URLS:
+        print(f"Fetching geometry from {url}...")
+        try:
+            response = requests.post(url, data={'data': QUERY}, headers=HEADERS, timeout=100)
+            response.raise_for_status()
             
-        response.raise_for_status()
-        
-        data = response.json()
-        elements = data.get('elements', [])
-        nodes = [e for e in elements if e['type'] == 'node']
-        
-        if not nodes:
-            print("No points found. The server might be busy or the query needs adjustment.")
-            return
+            data = response.json()
+            geojson = {"type": "FeatureCollection", "features": []}
+            
+            for element in data.get('elements', []):
+                if element['type'] == 'relation':
+                    for member in element.get('members', []):
+                        if 'geometry' in member:
+                            coordinates = [[p['lon'], p['lat']] for p in member['geometry']]
+                            geojson['features'].append({
+                                "type": "Feature",
+                                "geometry": {"type": "LineString", "coordinates": coordinates},
+                                "properties": {}
+                            })
+            
+            if geojson['features']:
+                with open("haiti_borders.json", "w") as f:
+                    json.dump(geojson, f)
+                print("Success! Data saved to 'haiti_borders.json'.")
+                return
+            
+        except Exception as e:
+            print(f"Attempt failed: {e}")
+            time.sleep(2)
 
-        filename = "haiti_borders.csv"
-        with open(filename, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(['latitude', 'longitude'])
-            for node in nodes:
-                writer.writerow([node['lat'], node['lon']])
-        
-        print(f"Success! '{filename}' created with {len(nodes)} points.")
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    print("Failed to fetch data from all servers.")
 
 if __name__ == "__main__":
     fetch_haiti_border()

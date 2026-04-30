@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haiti Border Only</title>
+    <title>Haiti Border - Simple Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         body, html { margin: 0; padding: 0; height: 100%; background: white; }
         #map { width: 100%; height: 100vh; background: white; }
-        /* Hide Leaflet attribution for a cleaner look */
         .leaflet-control-attribution { display: none; }
     </style>
 </head>
@@ -16,43 +15,31 @@
     <div id="map"></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <script>
-        // Initialize map with a white background and no zoom controls for extra simplicity
+        // Create the map without background images or controls
         var map = L.map('map', {
             zoomControl: false,
             attributionControl: false
-        }).setView([18.9, -72.2], 8);
+        });
 
-        // We are NOT adding a tileLayer (the background map) to keep it "very simple"
-
-        fetch('haiti_borders.csv')
-            .then(response => response.text())
-            .then(csvData => {
-                Papa.parse(csvData, {
-                    header: true,
-                    dynamicTyping: true,
-                    complete: function(results) {
-                        var borderPoints = [];
-                        results.data.forEach(function(row) {
-                            if (row.latitude && row.longitude) {
-                                borderPoints.push([row.latitude, row.longitude]);
-                            }
-                        });
-
-                        if (borderPoints.length > 0) {
-                            var polyline = L.polyline(borderPoints, {
-                                color: 'black', // Changed to black for a classic outline look
-                                weight: 2,
-                                opacity: 1
-                            }).addTo(map);
-
-                            map.fitBounds(polyline.getBounds());
-                        }
+        // Load the GeoJSON file (the ordered geometry)
+        fetch('haiti_borders.json')
+            .then(response => response.json())
+            .then(data => {
+                // Add the border to the map
+                var border = L.geoJSON(data, {
+                    style: {
+                        color: 'black',
+                        weight: 2,
+                        fillOpacity: 0
                     }
-                });
-            });
+                }).addTo(map);
+
+                // Zoom the map to fit the border
+                map.fitBounds(border.getBounds());
+            })
+            .catch(error => console.error('Error loading the map data:', error));
     </script>
 </body>
 </html>
