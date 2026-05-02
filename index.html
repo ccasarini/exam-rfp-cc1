@@ -52,7 +52,7 @@
         // --- STEP 1: Create a custom pane for labels ---
         // This ensures writings (text) always float above the colored polygons
         map.createPane('labels');
-        map.getPane('labels').style.zIndex = 650;
+        map.getPane('labels').style.zIndex = 1000;
         map.getPane('labels').style.pointerEvents = 'none';
 
         var currentLayer;
@@ -123,11 +123,16 @@
                 }).addTo(map);
 
                 // Filter for land borders only (adm_level 2) that touch Port-au-Prince
+                // We check both start and end points to ensure the line is ON the border
+                // and doesn't just proceed from an extremity.
                 landBordersLayer = L.geoJSON(linesData, {
                     filter: function(feature) {
                         if (feature.properties.adm_level !== 2) return false;
-                        const firstPoint = feature.geometry.coordinates[0];
-                        return papCoords.has(firstPoint[0].toFixed(5) + "," + firstPoint[1].toFixed(5));
+                        const coords = feature.geometry.coordinates;
+                        const first = coords[0];
+                        const last = coords[coords.length - 1];
+                        return papCoords.has(first[0].toFixed(5) + "," + first[1].toFixed(5)) && 
+                               papCoords.has(last[0].toFixed(5) + "," + last[1].toFixed(5));
                     },
                     style: {
                         color: "#333", // Dark Grey
