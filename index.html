@@ -47,54 +47,51 @@
 
     <script>
         // 5. Create the map and set a starting view near Haiti immediately
-        // This prevents the map from looking "lost" while data is loading
         var map = L.map('map').setView([18.9, -72.3], 7);
-        var currentLayer;
-        var isFirstLoad = true; // Flag to handle the very first zoom differently
+        
+        // --- STEP 1: Create a custom pane for labels ---
+        // This ensures writings (text) always float above the colored polygons
+        map.createPane('labels');
+        map.getPane('labels').style.zIndex = 650;
+        map.getPane('labels').style.pointerEvents = 'none'; // Allow clicks to pass through text
 
-        // 6. Define Pale/Neutral Styles
+        var currentLayer;
+        var isFirstLoad = true;
+
+        // --- STEP 2: Refine Styles ---
+        // Pastel green for Haiti, clear dark grey for city center
         var haitiStyle = {
-            color: "#888",
-            weight: 1,
+            color: "#999",
+            weight: 0.5,
             fillColor: "#e8f5e9", // Lighter Pastel Green
-            fillOpacity: 0.6
+            fillOpacity: 0.8
         };
 
         var paupStyle = {
-            color: "transparent", // No stroke for the main polygon
-            weight: 0,
-            fillColor: "#4a90e2",
-            fillOpacity: 0.4
+            color: "#333", // Dark Grey profile as requested
+            weight: 2,
+            fillColor: "transparent", // Simple profile, no internal blue/fill
+            fillOpacity: 0
         };
 
-        var landBorderStyle = {
-            color: "#4a90e2",
-            weight: 2.5,
-            opacity: 0.8,
-            lineJoin: "round"
-        };
-
-        // 7. Base Layers
+        // --- STEP 3: Add Base Layers ---
+        // Base map without labels
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            attribution: '&copy; OpenStreetMap',
             subdomains: 'abcd',
             maxZoom: 20
         }).addTo(map);
 
-        // Labels layer on top - Voyager labels are clearer/darker
+        // Labels layer in the foreground pane
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
             subdomains: 'abcd',
             maxZoom: 20,
-            zIndex: 1000,
-            opacity: 0.9
+            pane: 'labels' // Forces labels to be on top of polygons
         }).addTo(map);
 
-        var landBordersLayer;
-
-        // 8. Function to show Haiti
+        // 8. Function to show Haiti (Clean and Pastel)
         function showHaiti() {
             if (currentLayer) map.removeLayer(currentLayer);
-            if (landBordersLayer) map.removeLayer(landBordersLayer);
             
             fetch('haiti_borders/geojson/hti_admin0.geojson')
                 .then(res => res.json())
@@ -113,33 +110,22 @@
             document.getElementById('project-button').innerHTML = "click here to see the project";
         }
 
-        // 9. Function to show Port-au-Prince
+        // 9. Function to show Port-au-Prince (Simple Dark Grey Profile)
         function showProject() {
             if (currentLayer) map.removeLayer(currentLayer);
             
-            const loadPaup = fetch('haiti_borders/geojson/port_au_prince.geojson').then(r => r.json());
-            const loadLines = fetch('haiti_borders/geojson/hti_adminlines.geojson').then(r => r.json());
+            // Only load the city center boundary, no more internal neighborhood lines
+            fetch('haiti_borders/geojson/port_au_prince.geojson')
+                .then(res => res.json())
+                .then(data => {
+                    currentLayer = L.geoJSON(data, { style: paupStyle }).addTo(map);
 
-            Promise.all([loadPaup, loadLines]).then(([paupData, linesData]) => {
-                if (landBordersLayer) map.removeLayer(landBordersLayer);
-
-                currentLayer = L.geoJSON(paupData, { style: paupStyle }).addTo(map);
-
-                // Highlight land borders (adm_level 2 are internal commune boundaries)
-                // This elegantly excludes the coastline (adm_level 99)
-                landBordersLayer = L.geoJSON(linesData, {
-                    filter: function(feature) {
-                        return feature.properties.adm_level === 2;
-                    },
-                    style: landBorderStyle
-                }).addTo(map);
-
-                map.flyToBounds(currentLayer.getBounds(), { 
-                    padding: [100, 100], 
-                    duration: 2,
-                    easeLinearity: 0.25
+                    map.flyToBounds(currentLayer.getBounds(), { 
+                        padding: [120, 120], 
+                        duration: 2,
+                        easeLinearity: 0.25
+                    });
                 });
-            });
             
             document.getElementById('project-button').innerHTML = "back to national map";
         }
