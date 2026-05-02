@@ -5,10 +5,10 @@ import geopandas as gpd
 
 # 1. Configuration - Where to get the data and where to save it
 HDX_URL = "https://data.humdata.org/dataset/hotosm_hti_education_facilities/resource/47be53fa-5572-453a-9304-5345b3d1505e/download/hotosm_hti_education_facilities_points_geojson.zip"
-ZIP_PATH = "haiti_borders/schools/schools_points.zip"
-EXTRACT_PATH = "haiti_borders/schools/temp_schools"
-PAUP_BOUNDARY_PATH = "haiti_borders/boundaries/port_au_prince.geojson"
-OUTPUT_PATH = "haiti_borders/schools/paup_schools.geojson"
+ZIP_PATH = "data/schools/schools_points.zip"
+EXTRACT_PATH = "data/schools/temp_schools"
+PAUP_BOUNDARY_PATH = "data/borders/port_au_prince.geojson"
+OUTPUT_PATH = "data/schools/paup_schools.geojson"
 
 def fetch_and_filter_schools():
     # Step A: Create directories if they don't exist

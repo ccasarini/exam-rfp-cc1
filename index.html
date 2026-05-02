@@ -86,7 +86,7 @@
             if (currentLayer) map.removeLayer(currentLayer);
             if (landBordersLayer) map.removeLayer(landBordersLayer);
             
-            fetch('haiti_borders/boundaries/hti_admin0.geojson')
+            fetch('data/borders/hti_admin0.geojson')
                 .then(res => res.json())
                 .then(data => {
                     currentLayer = L.geoJSON(data, { style: haitiStyle }).addTo(map);
@@ -107,8 +107,8 @@
             if (currentLayer) map.removeLayer(currentLayer);
             if (landBordersLayer) map.removeLayer(landBordersLayer);
 
-            const loadPaup = fetch('haiti_borders/boundaries/port_au_prince.geojson').then(r => r.json());
-            const loadLines = fetch('haiti_borders/boundaries/hti_adminlines.geojson').then(r => r.json());
+            const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
+            const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
 
             Promise.all([loadPaup, loadLines]).then(([paupData, linesData]) => {
                 // Set for fast coordinate comparison
