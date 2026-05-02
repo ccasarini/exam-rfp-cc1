@@ -117,6 +117,7 @@
         var currentLayer;
         var landBordersLayer;
         var schoolLayer; // Layer for school markers
+        var conflictLayer; // Layer for conflict markers
         var isFirstLoad = true;
 
         // --- STEP 2: Refine Styles ---
@@ -137,6 +138,14 @@
             fillOpacity: 0.8
         };
 
+        // Style for conflict markers (Black Diamond)
+        var conflictIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='background-color: black; width: 12px; height: 12px; transform: rotate(45deg); border: 1px solid white;'></div>",
+            iconSize: [12, 12],
+            iconAnchor: [6, 6]
+        });
+
         // --- STEP 3: Add Base Layers ---
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap',
@@ -156,6 +165,7 @@
             if (currentLayer) map.removeLayer(currentLayer);
             if (landBordersLayer) map.removeLayer(landBordersLayer);
             if (schoolLayer) map.removeLayer(schoolLayer);
+            if (conflictLayer) map.removeLayer(conflictLayer);
             
             // UI Adjustments
             document.getElementById('details-section').style.display = 'none';
@@ -182,18 +192,20 @@
             if (currentLayer) map.removeLayer(currentLayer);
             if (landBordersLayer) map.removeLayer(landBordersLayer);
             if (schoolLayer) map.removeLayer(schoolLayer);
+            if (conflictLayer) map.removeLayer(conflictLayer);
 
             // UI Adjustments
             document.getElementById('details-section').style.display = 'block';
             document.getElementById('map-title').style.display = 'block';
             document.getElementById('map-title').innerHTML = "Greater Port-au-Prince Area";
-            document.getElementById('details-content').innerHTML = "Click on an orange marker on the map to see specific school information here.";
+            document.getElementById('details-content').innerHTML = "Click on an <strong>orange marker</strong> for school info or a <strong>black diamond</strong> for conflict data.";
 
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
             const loadSchools = fetch('data/schools/ouest_schools.geojson').then(r => r.json());
+            const loadConflicts = fetch('data/ouest_conflict.geojson').then(r => r.json());
 
-            Promise.all([loadPaup, loadLines, loadSchools]).then(([paupData, linesData, schoolData]) => {
+            Promise.all([loadPaup, loadLines, loadSchools, loadConflicts]).then(([paupData, linesData, schoolData, conflictData]) => {
                 // City area remains transparent (just a container)
                 currentLayer = L.geoJSON(paupData, { 
                     style: { color: "transparent", fillColor: "transparent" } 
@@ -219,10 +231,32 @@
                     onEachFeature: function (feature, layer) {
                         layer.on('click', function() {
                             const props = feature.properties;
-                            const html = `<div style="color: #ff9800; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${props.name || "Unnamed"}</div>` +
+                            document.getElementById('details-section').querySelector('h3').innerHTML = "Institution Details";
+                            const html = `<div style="color: #ff9800; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${props.name || "Unnamed School"}</div>` +
                                          `<strong>Type:</strong> ${props.amenity || "N/A"}<br>` +
                                          `<strong>OSM ID:</strong> ${props.osm_id || "N/A"}<br>` +
                                          `<strong>Coordinates:</strong> ${feature.geometry.coordinates[1].toFixed(4)}, ${feature.geometry.coordinates[0].toFixed(4)}`;
+                            document.getElementById('details-content').innerHTML = html;
+                        });
+                    }
+                }).addTo(map);
+
+                // Add conflict markers with Sidebar Interaction
+                conflictLayer = L.geoJSON(conflictData, {
+                    pointToLayer: function (feature, latlng) {
+                        return L.marker(latlng, { icon: conflictIcon });
+                    },
+                    onEachFeature: function (feature, layer) {
+                        layer.on('click', function() {
+                            const props = feature.properties;
+                            document.getElementById('details-section').querySelector('h3').innerHTML = "Conflict Event Details";
+                            const html = `<div style="color: black; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${props.event_type}</div>` +
+                                         `<strong>Sub-type:</strong> ${props.sub_event_type}<br>` +
+                                         `<strong>Fatalities:</strong> <span style="color: #d32f2f; font-weight: bold;">${props.fatalities}</span><br>` +
+                                         `<strong>Events Count:</strong> ${props.events_count}<br>` +
+                                         `<strong>Week:</strong> ${props.week}<br>` +
+                                         `<strong>Disorder:</strong> ${props.disorder_type}<br>` +
+                                         `<strong>Population Exposure:</strong> ${props.population_exposure}`;
                             document.getElementById('details-content').innerHTML = html;
                         });
                     }

@@ -1,0 +1,4033 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 99,
+        "events_count": 29,
+        "disorder_type": "Political violence",
+        "population_exposure": "112897",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 42,
+        "events_count": 12,
+        "disorder_type": "Political violence",
+        "population_exposure": "92773",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 18,
+        "events_count": 14,
+        "disorder_type": "Political violence",
+        "population_exposure": "176390",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 74,
+        "events_count": 24,
+        "disorder_type": "Political violence",
+        "population_exposure": "129106",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 62,
+        "events_count": 12,
+        "disorder_type": "Political violence",
+        "population_exposure": "78288",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 99,
+        "events_count": 18,
+        "disorder_type": "Political violence",
+        "population_exposure": "152474",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 83,
+        "events_count": 25,
+        "disorder_type": "Political violence",
+        "population_exposure": "155487",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 109,
+        "events_count": 37,
+        "disorder_type": "Political violence",
+        "population_exposure": "399960",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 12,
+        "events_count": 12,
+        "disorder_type": "Political violence",
+        "population_exposure": "149316",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 28,
+        "events_count": 26,
+        "disorder_type": "Political violence",
+        "population_exposure": "345707",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 59,
+        "events_count": 15,
+        "disorder_type": "Political violence",
+        "population_exposure": "199554",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 33,
+        "events_count": 9,
+        "disorder_type": "Political violence",
+        "population_exposure": "62162",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 41,
+        "events_count": 14,
+        "disorder_type": "Political violence",
+        "population_exposure": "200680",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 18,
+        "events_count": 9,
+        "disorder_type": "Political violence",
+        "population_exposure": "139053",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 6,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "13516",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 59,
+        "events_count": 10,
+        "disorder_type": "Political violence",
+        "population_exposure": "163176",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 34,
+        "events_count": 6,
+        "disorder_type": "Political violence",
+        "population_exposure": "73100",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 18,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "69101",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 34,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "132090",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 23,
+        "events_count": 6,
+        "disorder_type": "Political violence",
+        "population_exposure": "39463",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 24,
+        "events_count": 11,
+        "disorder_type": "Political violence",
+        "population_exposure": "107733",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 104,
+        "events_count": 15,
+        "disorder_type": "Political violence",
+        "population_exposure": "181682",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 48,
+        "events_count": 18,
+        "disorder_type": "Political violence",
+        "population_exposure": "185456",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 31,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "59588",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 17,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "111827",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 8,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "16652",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 22,
+        "events_count": 10,
+        "disorder_type": "Political violence",
+        "population_exposure": "107054",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 37,
+        "events_count": 17,
+        "disorder_type": "Political violence",
+        "population_exposure": "247543",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 27,
+        "events_count": 10,
+        "disorder_type": "Political violence",
+        "population_exposure": "54387",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 5,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "15742",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 27,
+        "events_count": 12,
+        "disorder_type": "Political violence",
+        "population_exposure": "108344",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 23,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "21157",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 9,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "58309",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 32,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "57885",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 5,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "32840",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 50,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "93696",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 3,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "44252",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 6,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "108732",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 2,
+        "events_count": 4,
+        "disorder_type": "Political violence",
+        "population_exposure": "115732",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 5,
+        "events_count": 6,
+        "disorder_type": "Political violence",
+        "population_exposure": "116222",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 15,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "78737",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 1,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "95384",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 26,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "115486",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 15,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "110847",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 17,
+        "events_count": 19,
+        "disorder_type": "Political violence",
+        "population_exposure": "165590",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 40,
+        "events_count": 21,
+        "disorder_type": "Political violence",
+        "population_exposure": "196224",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 26,
+        "events_count": 11,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 15,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "7086",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 47,
+        "events_count": 4,
+        "disorder_type": "Political violence",
+        "population_exposure": "64782",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 6,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "133226",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 5,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "11953",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Battles",
+        "sub_event_type": "Armed clash",
+        "fatalities": 23,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "174026",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 8,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 9,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 20,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "30001",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 25,
+        "events_count": 4,
+        "disorder_type": "Political violence",
+        "population_exposure": "53565",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 40,
+        "events_count": 9,
+        "disorder_type": "Political violence",
+        "population_exposure": "206753",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 10,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "21473",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 10,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "56264",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 8,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "164251",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 55,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "37100",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 10,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "5922",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 20,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "79470",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 18,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "5922",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 25,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "29025",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 36,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "69675",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 0,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "108304",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 100,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "114421",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "49897",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 17,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "49897",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "5922",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "5922",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 3,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "34756",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 4,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "25444",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 10,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "5922",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 24,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "157845",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 14,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "303187",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "49970",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 21,
+        "events_count": 4,
+        "disorder_type": "Political violence",
+        "population_exposure": "70288",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 3,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "48159",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 7,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "92683",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 3,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "41646",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "63687",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 5,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "32922",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "59022",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 34,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "27701",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Explosions/Remote violence",
+        "sub_event_type": "Air/drone strike",
+        "fatalities": 9,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Protests",
+        "sub_event_type": "Excessive force against protesters",
+        "fatalities": 3,
+        "events_count": 1,
+        "disorder_type": "Political violence; Demonstrations",
+        "population_exposure": "4101",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Protests",
+        "sub_event_type": "Excessive force against protesters",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence; Demonstrations",
+        "population_exposure": "3366",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Protests",
+        "sub_event_type": "Excessive force against protesters",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence; Demonstrations",
+        "population_exposure": "18430",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Protests",
+        "sub_event_type": "Excessive force against protesters",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence; Demonstrations",
+        "population_exposure": "16266",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 12,
+        "events_count": 4,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 2,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "49903",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 3,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 2,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 8,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 7,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "36455",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 3,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "5922",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 5,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "6409",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 6,
+        "events_count": 4,
+        "disorder_type": "Political violence",
+        "population_exposure": "5541",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "4118",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "33132",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 3,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 2,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "19559",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "33132",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "3655",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "29825",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 2,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "23964",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "33132",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "26832",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Riots",
+        "sub_event_type": "Mob violence",
+        "fatalities": 4,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "25593",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "15623",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "4459",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "11691",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "12509",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "12509",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "8588",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "2925",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "15362",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "11331",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "32798",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "52167",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "44869",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "24775",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "31282",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "7420",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "16661",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "40715",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "61487",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "71600",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "21387",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 4,
+        "disorder_type": "Political violence",
+        "population_exposure": "20190",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "3375",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 4,
+        "disorder_type": "Political violence",
+        "population_exposure": "36061",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "122332",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "14537",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Abduction/forced disappearance",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "23173",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 41,
+        "events_count": 11,
+        "disorder_type": "Political violence",
+        "population_exposure": "141757",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 10,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 8,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "115947",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 164,
+        "events_count": 37,
+        "disorder_type": "Political violence",
+        "population_exposure": "129543",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 9,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "23110",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 33,
+        "events_count": 33,
+        "disorder_type": "Political violence",
+        "population_exposure": "174621",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 76,
+        "events_count": 21,
+        "disorder_type": "Political violence",
+        "population_exposure": "262299",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 37,
+        "events_count": 46,
+        "disorder_type": "Political violence",
+        "population_exposure": "343990",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 67,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "44828",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 39,
+        "events_count": 27,
+        "disorder_type": "Political violence",
+        "population_exposure": "271169",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 41,
+        "events_count": 20,
+        "disorder_type": "Political violence",
+        "population_exposure": "193722",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 70,
+        "events_count": 20,
+        "disorder_type": "Political violence",
+        "population_exposure": "95292",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 17,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "117319",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 12,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "14234",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 30,
+        "events_count": 14,
+        "disorder_type": "Political violence",
+        "population_exposure": "113177",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 6,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "75989",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 5,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "46381",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 12,
+        "events_count": 9,
+        "disorder_type": "Political violence",
+        "population_exposure": "36814",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 11,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "112684",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 3,
+        "events_count": 4,
+        "disorder_type": "Political violence",
+        "population_exposure": "51202",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 19,
+        "events_count": 6,
+        "disorder_type": "Political violence",
+        "population_exposure": "115624",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 17,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "65903",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 10,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "68696",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 26,
+        "events_count": 10,
+        "disorder_type": "Political violence",
+        "population_exposure": "149679",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 5,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "13424",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 18,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "78521",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 21,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "28494",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 13,
+        "events_count": 9,
+        "disorder_type": "Political violence",
+        "population_exposure": "84690",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 1,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "73407",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 10,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "49593",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 9,
+        "events_count": 6,
+        "disorder_type": "Political violence",
+        "population_exposure": "113780",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 5,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "53605",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 4,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "20869",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 3,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "7781",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 64,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "48385",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 16,
+        "events_count": 6,
+        "disorder_type": "Political violence",
+        "population_exposure": "92926",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 2,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "22758",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 2,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "25444",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 10,
+        "events_count": 6,
+        "disorder_type": "Political violence",
+        "population_exposure": "145845",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 3,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "172578",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 3,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "32841",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 9,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "45417",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 9,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "20329",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 19,
+        "events_count": 10,
+        "disorder_type": "Political violence",
+        "population_exposure": "45205",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 10,
+        "events_count": 7,
+        "disorder_type": "Political violence",
+        "population_exposure": "14909",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 12,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 54,
+        "events_count": 5,
+        "disorder_type": "Political violence",
+        "population_exposure": "128125",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 1,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "165816",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 3,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "1267",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Attack",
+        "fatalities": 18,
+        "events_count": 8,
+        "disorder_type": "Political violence",
+        "population_exposure": "34594",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "1217",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "13322",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 1,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "3448",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "5922",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "45346",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "25444",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 6,
+        "events_count": 3,
+        "disorder_type": "Political violence",
+        "population_exposure": "32245",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 1,
+        "events_count": 2,
+        "disorder_type": "Political violence",
+        "population_exposure": "1365",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "12509",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 2,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "9923",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "1739",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "9923",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "49898",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 1,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "event_type": "Violence against civilians",
+        "sub_event_type": "Sexual violence",
+        "fatalities": 0,
+        "events_count": 1,
+        "disorder_type": "Political violence",
+        "population_exposure": "",
+        "week": "############"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.1737,
+          18.6173
+        ]
+      }
+    }
+  ]
+}
