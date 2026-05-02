@@ -12,37 +12,96 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
-        /* 3. Make the map fill the entire browser window */
-        body { margin: 0; padding: 0; }
-        #map { height: 100vh; width: 100vw; }
+        /* 3. Layout: Sidebar and Map */
+        body { margin: 0; padding: 0; display: flex; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
         
-        /* 4. Style the interactive button */
-        #project-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 1000; /* Ensures button stays above the map */
-            padding: 12px 24px;
-            background-color: white;
-            border: 2px solid #ccc;
+        #sidebar {
+            width: 320px;
+            height: 100vh;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 2000; /* Above map and labels */
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            border-right: 1px solid #eee;
+        }
+
+        #map { flex-grow: 1; height: 100vh; position: relative; }
+        
+        /* Sidebar Content */
+        h2 { color: #333; margin-top: 0; font-size: 1.5rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 10px; }
+        h3 { font-size: 1.1rem; color: #666; margin-bottom: 10px; }
+        .sidebar-section { margin-bottom: 30px; }
+        .details-box {
+            background-color: #f9f9f9;
+            padding: 15px;
             border-radius: 8px;
-            font-family: Arial, sans-serif;
+            border: 1px solid #ddd;
+            min-height: 120px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #444;
+        }
+        
+        /* 4. Interactive button in Sidebar */
+        #project-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         #project-button:hover {
-            background-color: #f0f0f0;
-            border-color: #999;
+            background-color: #555;
+            transform: translateY(-1px);
+        }
+
+        /* Right side title */
+        #map-title {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1500;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 25px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+            display: none; /* Hidden by default */
+            pointer-events: none;
+            border-left: 5px solid #ff9800;
         }
     </style>
 </head>
 <body>
 
-    <!-- 5. Add the Button and the Map container -->
-    <button id="project-button">click here to see the project</button>
+    <div id="sidebar">
+        <div class="sidebar-section">
+            <h2>Haiti Explorer</h2>
+            <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Navigate between the national view and city-specific projects.</p>
+            <button id="project-button">click here to see the project</button>
+        </div>
+        
+        <div class="sidebar-section" id="details-section" style="display: none;">
+            <h3>Institution Details</h3>
+            <div id="details-content" class="details-box">
+                Click on an orange marker on the map to see specific school information here.
+            </div>
+        </div>
+    </div>
+
+    <div id="map-title">Port-au-Prince city</div>
     <div id="map"></div>
 
     <script>
@@ -98,6 +157,10 @@
             if (landBordersLayer) map.removeLayer(landBordersLayer);
             if (schoolLayer) map.removeLayer(schoolLayer);
             
+            // UI Adjustments
+            document.getElementById('details-section').style.display = 'none';
+            document.getElementById('map-title').style.display = 'none';
+
             fetch('data/borders/hti_admin0.geojson')
                 .then(res => res.json())
                 .then(data => {
@@ -120,6 +183,11 @@
             if (landBordersLayer) map.removeLayer(landBordersLayer);
             if (schoolLayer) map.removeLayer(schoolLayer);
 
+            // UI Adjustments
+            document.getElementById('details-section').style.display = 'block';
+            document.getElementById('map-title').style.display = 'block';
+            document.getElementById('details-content').innerHTML = "Click on an orange marker on the map to see specific school information here.";
+
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
             const loadSchools = fetch('data/schools/paup_schools.geojson').then(r => r.json());
@@ -137,8 +205,6 @@
                 }).addTo(map);
 
                 // Filter for land borders only (adm_level 2) that touch Port-au-Prince
-                // We check both start and end points to ensure the line is ON the border
-                // and doesn't just proceed from an extremity.
                 landBordersLayer = L.geoJSON(linesData, {
                     filter: function(feature) {
                         if (feature.properties.adm_level !== 2) return false;
@@ -150,28 +216,31 @@
                     },
                     style: {
                         color: "#333", // Dark Grey
-                        weight: 2,
+                        weight: 2.5,
                         opacity: 1
                     }
                 }).addTo(map);
 
-                // Add school markers
+                // Add school markers with Sidebar Interaction
                 schoolLayer = L.geoJSON(schoolData, {
                     pointToLayer: function (feature, latlng) {
                         return L.circleMarker(latlng, schoolMarkerStyle);
                     },
                     onEachFeature: function (feature, layer) {
-                        if (feature.properties) {
-                            var popupContent = "<strong>" + (feature.properties.name || "Unnamed Institution") + "</strong><br>" +
-                                               "Type: " + (feature.properties.amenity || "N/A");
-                            layer.bindPopup(popupContent);
-                        }
+                        layer.on('click', function() {
+                            const props = feature.properties;
+                            const html = `<div style="color: #ff9800; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${props.name || "Unnamed"}</div>` +
+                                         `<strong>Type:</strong> ${props.amenity || "N/A"}<br>` +
+                                         `<strong>OSM ID:</strong> ${props.osm_id || "N/A"}<br>` +
+                                         `<strong>Coordinates:</strong> ${feature.geometry.coordinates[1].toFixed(4)}, ${feature.geometry.coordinates[0].toFixed(4)}`;
+                            document.getElementById('details-content').innerHTML = html;
+                        });
                     }
                 }).addTo(map);
 
-                // Precision Zoom to City Center
+                // Precision Zoom to City Center (Tighter for better school view)
                 map.flyToBounds(currentLayer.getBounds(), { 
-                    padding: [40, 40], // Tighter zoom for precision
+                    padding: [20, 20], 
                     duration: 2,
                     easeLinearity: 0.25
                 });
