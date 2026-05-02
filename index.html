@@ -204,20 +204,17 @@
                     style: { color: "transparent", fillColor: "transparent" } 
                 }).addTo(map);
 
-                // Filter for land borders only (adm_level 2) that touch Port-au-Prince
+                // Filter for land borders only (adm_level 2)
+                // This now includes PAP and all neighboring communes
                 landBordersLayer = L.geoJSON(linesData, {
                     filter: function(feature) {
-                        if (feature.properties.adm_level !== 2) return false;
-                        const coords = feature.geometry.coordinates;
-                        const first = coords[0];
-                        const last = coords[coords.length - 1];
-                        return papCoords.has(first[0].toFixed(5) + "," + first[1].toFixed(5)) && 
-                               papCoords.has(last[0].toFixed(5) + "," + last[1].toFixed(5));
+                        // adm_level 2 represents land borders between communes
+                        return feature.properties.adm_level === 2;
                     },
                     style: {
-                        color: "#333", // Dark Grey
-                        weight: 2.5,
-                        opacity: 1
+                        color: "#999", // Thin neutral grey
+                        weight: 0.8,   // Very thin as requested
+                        opacity: 0.8
                     }
                 }).addTo(map);
 
@@ -238,9 +235,9 @@
                     }
                 }).addTo(map);
 
-                // Precision Zoom to City Center (Tighter for better school view)
+                // Precision Zoom to City Center Area (Expanded to see neighbors)
                 map.flyToBounds(currentLayer.getBounds(), { 
-                    padding: [20, 20], 
+                    padding: [150, 150], 
                     duration: 2,
                     easeLinearity: 0.25
                 });
