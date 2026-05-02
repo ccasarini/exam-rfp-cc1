@@ -117,7 +117,6 @@
         var currentLayer;
         var landBordersLayer;
         var schoolLayer; // Layer for school markers
-        var conflictLayer; // Layer for conflict markers
         var layerControl; // Control for toggling layers
         var isFirstLoad = true;
 
@@ -139,14 +138,6 @@
             fillOpacity: 0.8
         };
 
-        // Style for conflict markers (Black Diamond)
-        var conflictIcon = L.divIcon({
-            className: 'custom-div-icon',
-            html: "<div style='background-color: black; width: 12px; height: 12px; transform: rotate(45deg); border: 1px solid white;'></div>",
-            iconSize: [12, 12],
-            iconAnchor: [6, 6]
-        });
-
         // --- STEP 3: Add Base Layers ---
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap',
@@ -166,7 +157,6 @@
             if (currentLayer) map.removeLayer(currentLayer);
             if (landBordersLayer) map.removeLayer(landBordersLayer);
             if (schoolLayer) map.removeLayer(schoolLayer);
-            if (conflictLayer) map.removeLayer(conflictLayer);
             if (layerControl) {
                 map.removeControl(layerControl);
                 layerControl = null;
@@ -197,7 +187,6 @@
             if (currentLayer) map.removeLayer(currentLayer);
             if (landBordersLayer) map.removeLayer(landBordersLayer);
             if (schoolLayer) map.removeLayer(schoolLayer);
-            if (conflictLayer) map.removeLayer(conflictLayer);
             if (layerControl) {
                 map.removeControl(layerControl);
                 layerControl = null;
@@ -212,9 +201,8 @@
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
             const loadSchools = fetch('data/schools/ouest_schools.geojson').then(r => r.json());
-            const loadConflicts = fetch('data/ouest_conflict.geojson').then(r => r.json());
 
-            Promise.all([loadPaup, loadLines, loadSchools, loadConflicts]).then(([paupData, linesData, schoolData, conflictData]) => {
+            Promise.all([loadPaup, loadLines, loadSchools]).then(([paupData, linesData, schoolData]) => {
                 // City area remains transparent (just a container)
                 currentLayer = L.geoJSON(paupData, { 
                     style: { color: "transparent", fillColor: "transparent" } 
@@ -250,31 +238,9 @@
                     }
                 }).addTo(map);
 
-                // Create Conflict Layer
-                conflictLayer = L.geoJSON(conflictData, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.marker(latlng, { icon: conflictIcon });
-                    },
-                    onEachFeature: function (feature, layer) {
-                        layer.on('click', function() {
-                            const props = feature.properties;
-                            document.getElementById('details-section').querySelector('h3').innerHTML = "Conflict Event Details";
-                            const html = `<div style="color: black; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${props.event_type}</div>` +
-                                         `<strong>Sub-type:</strong> ${props.sub_event_type}<br>` +
-                                         `<strong>Fatalities:</strong> <span style="color: #d32f2f; font-weight: bold;">${props.fatalities}</span><br>` +
-                                         `<strong>Events Count:</strong> ${props.events_count}<br>` +
-                                         `<strong>Week:</strong> ${props.week}<br>` +
-                                         `<strong>Disorder:</strong> ${props.disorder_type}<br>` +
-                                         `<strong>Population Exposure:</strong> ${props.population_exposure}`;
-                            document.getElementById('details-content').innerHTML = html;
-                        });
-                    }
-                }).addTo(map);
-
                 // Add Layer Control
                 var overlays = {
-                    "<span style='color: #ff9800; font-weight: bold;'>Schools</span>": schoolLayer,
-                    "<span style='color: black; font-weight: bold;'>Armed Conflict</span>": conflictLayer
+                    "<span style='color: #ff9800; font-weight: bold;'>Schools</span>": schoolLayer
                 };
                 layerControl = L.control.layers(null, overlays, { collapsed: false }).addTo(map);
 
