@@ -186,34 +186,27 @@
             // UI Adjustments
             document.getElementById('details-section').style.display = 'block';
             document.getElementById('map-title').style.display = 'block';
+            document.getElementById('map-title').innerHTML = "Greater Port-au-Prince Area";
             document.getElementById('details-content').innerHTML = "Click on an orange marker on the map to see specific school information here.";
 
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
-            const loadSchools = fetch('data/schools/paup_schools.geojson').then(r => r.json());
+            const loadSchools = fetch('data/schools/ouest_schools.geojson').then(r => r.json());
 
             Promise.all([loadPaup, loadLines, loadSchools]).then(([paupData, linesData, schoolData]) => {
-                // Set for fast coordinate comparison
-                const papCoords = new Set();
-                paupData.features[0].geometry.coordinates[0].forEach(c => {
-                    papCoords.add(c[0].toFixed(5) + "," + c[1].toFixed(5));
-                });
-
                 // City area remains transparent (just a container)
                 currentLayer = L.geoJSON(paupData, { 
                     style: { color: "transparent", fillColor: "transparent" } 
                 }).addTo(map);
 
                 // Filter for land borders only (adm_level 2)
-                // This now includes PAP and all neighboring communes
                 landBordersLayer = L.geoJSON(linesData, {
                     filter: function(feature) {
-                        // adm_level 2 represents land borders between communes
                         return feature.properties.adm_level === 2;
                     },
                     style: {
-                        color: "#999", // Thin neutral grey
-                        weight: 0.8,   // Very thin as requested
+                        color: "#999", 
+                        weight: 0.8,   
                         opacity: 0.8
                     }
                 }).addTo(map);
@@ -235,9 +228,9 @@
                     }
                 }).addTo(map);
 
-                // Precision Zoom to City Center Area (Expanded to see neighbors)
-                map.flyToBounds(currentLayer.getBounds(), { 
-                    padding: [150, 150], 
+                // Zoom to the extent of all schools for a better overview of the region
+                map.flyToBounds(schoolLayer.getBounds(), { 
+                    padding: [50, 50], 
                     duration: 2,
                     easeLinearity: 0.25
                 });
