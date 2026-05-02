@@ -54,17 +54,24 @@
 
         // 6. Define Pale/Neutral Styles
         var haitiStyle = {
-            color: "#666",
-            weight: 1.5,
-            fillColor: "#c8e6c9", // Pale Green
-            fillOpacity: 0.5
+            color: "#888",
+            weight: 1,
+            fillColor: "#e8f5e9", // Lighter Pastel Green
+            fillOpacity: 0.6
         };
 
         var paupStyle = {
+            color: "transparent", // No stroke for the main polygon
+            weight: 0,
+            fillColor: "#4a90e2",
+            fillOpacity: 0.4
+        };
+
+        var landBorderStyle = {
             color: "#4a90e2",
-            weight: 3,
-            fillColor: "#aec6cf", // Pale blue
-            fillOpacity: 0.5
+            weight: 2.5,
+            opacity: 0.8,
+            lineJoin: "round"
         };
 
         // 7. Base Layers
@@ -74,29 +81,32 @@
             maxZoom: 20
         }).addTo(map);
 
-        // Labels layer on top
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+        // Labels layer on top - Voyager labels are clearer/darker
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
             subdomains: 'abcd',
             maxZoom: 20,
-            zIndex: 1000 // Ensure names stay on top
+            zIndex: 1000,
+            opacity: 0.9
         }).addTo(map);
+
+        var landBordersLayer;
 
         // 8. Function to show Haiti
         function showHaiti() {
             if (currentLayer) map.removeLayer(currentLayer);
+            if (landBordersLayer) map.removeLayer(landBordersLayer);
             
             fetch('haiti_borders/geojson/hti_admin0.geojson')
                 .then(res => res.json())
                 .then(data => {
                     currentLayer = L.geoJSON(data, { style: haitiStyle }).addTo(map);
                     
+                    const zoomOptions = { padding: [50, 50], duration: 2, easeLinearity: 0.25 };
                     if (isFirstLoad) {
-                        // Instant zoom for the first time
                         map.fitBounds(currentLayer.getBounds(), { padding: [20, 20] });
                         isFirstLoad = false;
                     } else {
-                        // Fluid flight for button clicks
-                        map.flyToBounds(currentLayer.getBounds(), { padding: [20, 20], duration: 1.5 });
+                        map.flyToBounds(currentLayer.getBounds(), zoomOptions);
                     }
                 });
             
@@ -107,12 +117,29 @@
         function showProject() {
             if (currentLayer) map.removeLayer(currentLayer);
             
-            fetch('haiti_borders/geojson/port_au_prince.geojson')
-                .then(res => res.json())
-                .then(data => {
-                    currentLayer = L.geoJSON(data, { style: paupStyle }).addTo(map);
-                    map.flyToBounds(currentLayer.getBounds(), { padding: [80, 80], duration: 1.5 });
+            const loadPaup = fetch('haiti_borders/geojson/port_au_prince.geojson').then(r => r.json());
+            const loadLines = fetch('haiti_borders/geojson/hti_adminlines.geojson').then(r => r.json());
+
+            Promise.all([loadPaup, loadLines]).then(([paupData, linesData]) => {
+                if (landBordersLayer) map.removeLayer(landBordersLayer);
+
+                currentLayer = L.geoJSON(paupData, { style: paupStyle }).addTo(map);
+
+                // Highlight land borders (adm_level 2 are internal commune boundaries)
+                // This elegantly excludes the coastline (adm_level 99)
+                landBordersLayer = L.geoJSON(linesData, {
+                    filter: function(feature) {
+                        return feature.properties.adm_level === 2;
+                    },
+                    style: landBorderStyle
+                }).addTo(map);
+
+                map.flyToBounds(currentLayer.getBounds(), { 
+                    padding: [100, 100], 
+                    duration: 2,
+                    easeLinearity: 0.25
                 });
+            });
             
             document.getElementById('project-button').innerHTML = "back to national map";
         }
