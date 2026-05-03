@@ -141,11 +141,11 @@
 
         var secondaryMarkerStyle = {
             radius: 6,
-            fillColor: "#e65100", // Darker Orange
+            fillColor: "#5d4037", // Deep Brown-Orange (Material Brown 700)
             color: "#fff",
             weight: 1,
             opacity: 1,
-            fillOpacity: 0.8
+            fillOpacity: 0.9
         };
 
         // --- STEP 3: Add Base Layers ---
@@ -260,7 +260,7 @@
                 // Add Layer Control at Bottom Left
                 var overlays = {
                     "<span style='color: #ff9800; font-weight: bold;'>Primary Schools</span>": primaryLayer,
-                    "<span style='color: #e65100; font-weight: bold;'>Secondary Schools</span>": secondaryLayer
+                    "<span style='color: #5d4037; font-weight: bold;'>Secondary Schools</span>": secondaryLayer
                 };
                 layerControl = L.control.layers(null, overlays, { 
                     collapsed: false,
