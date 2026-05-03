@@ -78,10 +78,30 @@
             background-color: #000;
             transform: rotate(45deg);
             border: 1px solid #fff;
-            width: 8px;
-            height: 8px;
-            box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-            margin: 2px; /* Centers it within the iconSize */
+            width: 10px;
+            height: 10px;
+            box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+            margin: 1px;
+        }
+
+        /* Timeline Slider Styles */
+        #timeline-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            display: none;
+        }
+        #timeline-slider {
+            width: 100%;
+            cursor: pointer;
+        }
+        #year-display {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 5px;
         }
 
         /* Right side title */
@@ -110,6 +130,13 @@
             <h2>Haiti Explorer</h2>
             <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Navigate between the national view and city-specific projects.</p>
             <button id="project-button">click here to see the project</button>
+            
+            <div id="timeline-container">
+                <div id="year-display">Year: 2024</div>
+                <div id="event-count" style="font-size: 0.8rem; color: #666; text-align: center; margin-bottom: 10px;">0 events found</div>
+                <input type="range" id="timeline-slider" min="1999" max="2024" value="2024">
+                <p style="font-size: 0.75rem; color: #666; margin-top: 5px; text-align: center;">Slide to track conflict evolution (1999-Present)</p>
+            </div>
         </div>
         
         <div class="sidebar-section" id="details-section" style="display: none;">
@@ -137,6 +164,7 @@
         var primaryLayer;   
         var secondaryLayer; 
         var conflictLayer;  
+        var allConflictData = [];
         var layerControl;   
         var isFirstLoad = true;
 
@@ -192,6 +220,7 @@
             
             document.getElementById('details-section').style.display = 'none';
             document.getElementById('map-title').style.display = 'none';
+            document.getElementById('timeline-container').style.display = 'none';
 
             fetch('data/borders/hti_admin0.geojson')
                 .then(res => res.json())
@@ -222,15 +251,16 @@
 
             document.getElementById('details-section').style.display = 'block';
             document.getElementById('map-title').style.display = 'block';
+            document.getElementById('timeline-container').style.display = 'block';
             document.getElementById('map-title').innerHTML = "Greater Port-au-Prince Area";
-            document.getElementById('details-content').innerHTML = "Use the <strong>Layer Control</strong> (bottom-left) to toggle schools and conflict data. Click markers for details.";
+            document.getElementById('details-content').innerHTML = "Use the <strong>Layer Control</strong> (bottom-left) to toggle schools and conflict data. Use the <strong>Timeline Slider</strong> to filter events by year.";
 
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
             const loadSchools = fetch('data/schools/ouest_schools.geojson').then(r => r.json());
             const loadConflicts = fetch('data/armed_conflicts/haiti_ucdp_conflict_cleaned.csv').then(r => r.text());
 
-            Promise.all([loadPaup, loadLines, loadSchools, loadConflicts]).then(([paupData, linesData, schoolData, conflictData]) => {
+            Promise.all([loadPaup, loadLines, loadSchools, loadConflicts]).then(([paupData, linesData, schoolData, conflictRaw]) => {
                 currentLayer = L.geoJSON(paupData, { 
                     style: { color: "transparent", fillColor: "transparent" } 
                 }).addTo(map);
@@ -264,8 +294,8 @@
                 // Helper for categorization
                 function getCategory(headline) {
                     headline = (headline || "").toLowerCase();
-                    if (headline.includes("shot dead") || headline.includes("murdered") || headline.includes("assassination") || headline.includes("journalist killed") || headline.includes("student shot") || headline.includes("mechanic shot") || headline.includes("abattu") || headline.includes("tué") || headline.includes("assassinat")) {
-                        return "Targeted Assassinations and Extrajudicial Killings";
+                    if (headline.includes("shot dead") || headline.includes("murdered") || headline.includes("assassination") || headline.includes("journalist killed") || headline.includes("student shot") || headline.includes("mechanic shot") || headline.includes("abattu") || headline.includes("tué") || headline.includes("assassinat") || headline.includes("repression")) {
+                        return "Targeted Assassinations and Political Repression";
                     }
                     if (headline.includes("massacre") || headline.includes("carnage") || headline.includes("raid") || headline.includes("houses set on fire") || headline.includes("fires") || headline.includes("incendie")) {
                         return "Large-Scale Massacres and Neighborhood Raids";
@@ -293,12 +323,13 @@
 
                 // Process Armed Conflict Data
                 conflictLayer = L.layerGroup();
-                Papa.parse(conflictData, {
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: function(results) {
-                        results.data.forEach(function(row) {
-                            // Extract coordinates from geom_wkt: POINT (-72.335 18.53917)
+                allConflictData = Papa.parse(conflictRaw, { header: true, skipEmptyLines: true }).data;
+
+                function updateConflictMarkers(selectedYear) {
+                    conflictLayer.clearLayers();
+                    let count = 0;
+                    allConflictData.forEach(function(row) {
+                        if (row.year && parseInt(row.year) === parseInt(selectedYear)) {
                             var lat, lon;
                             if (row.geom_wkt) {
                                 var coords = row.geom_wkt.match(/POINT\s*\(([-\d.]+)\s+([-\d.]+)\)/);
@@ -309,8 +340,8 @@
                             }
                             
                             if (lat && lon) {
+                                count++;
                                 var category = getCategory(row.source_headline);
-                                
                                 var marker = L.marker([lat, lon], {
                                     icon: L.divIcon({ 
                                         className: 'conflict-icon-container',
@@ -325,23 +356,29 @@
                                     const html = `<div style="color: #d32f2f; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${category}</div>` +
                                                  `<strong>Date:</strong> ${row.date_event ? row.date_event.split(' ')[0] : row.year}<br>` +
                                                  `<strong>Location:</strong> ${row.where_coordinates || row.adm_2 || "Unknown"}<br>` +
-                                                 `<strong>Generated by:</strong> ${row.side_a} ${row.side_b ? " vs " + row.side_b : ""}<br>` +
-                                                 `<strong>Fatalities:</strong> ${row.total_deaths_best_estimate || 0}`;
+                                                 `<strong>Participants:</strong> ${row.side_a} vs ${row.side_b || "Unknown"}<br>` +
+                                                 `<strong>Fatalities:</strong> ${row.total_deaths_best_estimate || 0}<br>` +
+                                                 `<div style="font-size: 0.8rem; color: #666; margin-top: 10px; font-style: italic;">Headline: ${row.source_headline || "N/A"}</div>`;
                                     document.getElementById('details-content').innerHTML = html;
                                 });
-                                
-                                marker.bindPopup(`<strong>${category}</strong><br>` +
-                                                 `Date: ${row.date_event ? row.date_event.split(' ')[0] : row.year}<br>` +
-                                                 `Location: ${row.where_coordinates || row.adm_2 || "Unknown"}<br>` +
-                                                 `Generated by: ${row.side_a} ${row.side_b ? " vs " + row.side_b : ""}<br>` +
-                                                 `Fatalities: ${row.total_deaths_best_estimate || 0}`);
-
                                 marker.addTo(conflictLayer);
                             }
-                        });
-                        conflictLayer.addTo(map);
-                    }
-                });
+                        }
+                    });
+                    document.getElementById('event-count').innerHTML = count + " events found in " + selectedYear;
+                }
+
+                // Initialize slider
+                const slider = document.getElementById('timeline-slider');
+                const yearDisplay = document.getElementById('year-display');
+                slider.oninput = function() {
+                    yearDisplay.innerHTML = "Year: " + this.value;
+                    updateConflictMarkers(this.value);
+                };
+
+                // Initial render for the first year on the slider
+                updateConflictMarkers(slider.value);
+                conflictLayer.addTo(map);
 
                 var overlays = {
                     "<span style='color: #ff9800; font-weight: bold;'>Primary Schools</span>": primaryLayer,
