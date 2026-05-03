@@ -10,6 +10,8 @@
     
     <!-- 2. Leaflet JavaScript (The 'brains' of the map) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- 2.5. PapaParse for CSV handling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
     <style>
         /* 3. Layout: Sidebar and Map */
@@ -43,6 +45,8 @@
             font-size: 0.95rem;
             line-height: 1.5;
             color: #444;
+            overflow-y: auto;
+            max-height: 300px;
         }
         
         /* 4. Interactive button in Sidebar */
@@ -63,6 +67,17 @@
         #project-button:hover {
             background-color: #555;
             transform: translateY(-1px);
+        }
+
+        /* Conflict Marker Style */
+        .conflict-diamond {
+            background-color: #000;
+            transform: rotate(45deg);
+            border: 1px solid #fff;
+            width: 8px !important;
+            height: 8px !important;
+            margin-left: -4px !important;
+            margin-top: -4px !important;
         }
 
         /* Right side title */
@@ -94,9 +109,9 @@
         </div>
         
         <div class="sidebar-section" id="details-section" style="display: none;">
-            <h3>Institution Details</h3>
+            <h3>Information Details</h3>
             <div id="details-content" class="details-box">
-                Click on an orange marker on the map to see specific school information here.
+                Use the <strong>Layer Control</strong> to toggle schools and conflict data. Click markers for details.
             </div>
         </div>
     </div>
@@ -109,30 +124,29 @@
         var map = L.map('map').setView([18.9, -72.3], 7);
         
         // --- STEP 1: Create a custom pane for labels ---
-        // This ensures writings (text) always float above the colored polygons
         map.createPane('labels');
         map.getPane('labels').style.zIndex = 1000;
         map.getPane('labels').style.pointerEvents = 'none';
 
         var currentLayer;
         var landBordersLayer;
-        var primaryLayer;   // Layer for primary schools
-        var secondaryLayer; // Layer for secondary schools
-        var layerControl;   // Control for toggling layers
+        var primaryLayer;   
+        var secondaryLayer; 
+        var conflictLayer;  
+        var layerControl;   
         var isFirstLoad = true;
 
         // --- STEP 2: Refine Styles ---
         var haitiStyle = {
             color: "#999",
             weight: 0.5,
-            fillColor: "#e8f5e9", // Pastel Green
+            fillColor: "#e8f5e9", 
             fillOpacity: 0.8
         };
 
-        // Style for school markers
         var primaryMarkerStyle = {
             radius: 6,
-            fillColor: "#ff9800", // Standard Orange
+            fillColor: "#ff9800", 
             color: "#fff",
             weight: 1,
             opacity: 1,
@@ -141,7 +155,7 @@
 
         var secondaryMarkerStyle = {
             radius: 6,
-            fillColor: "#5d4037", // Deep Brown-Orange (Material Brown 700)
+            fillColor: "#5d4037", 
             color: "#fff",
             weight: 1,
             opacity: 1,
@@ -155,25 +169,23 @@
             maxZoom: 20
         }).addTo(map);
 
-        // Labels layer in the foreground pane
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
             subdomains: 'abcd',
             maxZoom: 20,
             pane: 'labels'
         }).addTo(map);
 
-        // 8. Function to show Haiti (Clean and Pastel)
         function showHaiti() {
             if (currentLayer) map.removeLayer(currentLayer);
             if (landBordersLayer) map.removeLayer(landBordersLayer);
             if (primaryLayer) map.removeLayer(primaryLayer);
             if (secondaryLayer) map.removeLayer(secondaryLayer);
+            if (conflictLayer) map.removeLayer(conflictLayer);
             if (layerControl) {
                 map.removeControl(layerControl);
                 layerControl = null;
             }
             
-            // UI Adjustments
             document.getElementById('details-section').style.display = 'none';
             document.getElementById('map-title').style.display = 'none';
 
@@ -198,48 +210,36 @@
             if (landBordersLayer) map.removeLayer(landBordersLayer);
             if (primaryLayer) map.removeLayer(primaryLayer);
             if (secondaryLayer) map.removeLayer(secondaryLayer);
+            if (conflictLayer) map.removeLayer(conflictLayer);
             if (layerControl) {
                 map.removeControl(layerControl);
                 layerControl = null;
             }
 
-            // UI Adjustments
             document.getElementById('details-section').style.display = 'block';
             document.getElementById('map-title').style.display = 'block';
             document.getElementById('map-title').innerHTML = "Greater Port-au-Prince Area";
-            document.getElementById('details-content').innerHTML = "Use the <strong>Layer Control</strong> (bottom-left) to toggle schools. Click markers for details.";
+            document.getElementById('details-content').innerHTML = "Use the <strong>Layer Control</strong> (bottom-left) to toggle schools and conflict data. Click markers for details.";
 
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
             const loadSchools = fetch('data/schools/ouest_schools.geojson').then(r => r.json());
+            const loadConflicts = fetch('data/haiti_ucdp_conflict.csv').then(r => r.text());
 
-            Promise.all([loadPaup, loadLines, loadSchools]).then(([paupData, linesData, schoolData]) => {
-                // City area remains transparent (just a container)
+            Promise.all([loadPaup, loadLines, loadSchools, loadConflicts]).then(([paupData, linesData, schoolData, conflictData]) => {
                 currentLayer = L.geoJSON(paupData, { 
                     style: { color: "transparent", fillColor: "transparent" } 
                 }).addTo(map);
 
-                // Filter for land borders only (adm_level 2)
                 landBordersLayer = L.geoJSON(linesData, {
-                    filter: function(feature) {
-                        return feature.properties.adm_level === 2;
-                    },
-                    style: {
-                        color: "#999", 
-                        weight: 0.8,   
-                        opacity: 0.8
-                    }
+                    filter: function(feature) { return feature.properties.adm_level === 2; },
+                    style: { color: "#999", weight: 0.8, opacity: 0.8 }
                 }).addTo(map);
 
-                // Helper to create school layers
                 function createSchoolLayer(data, amenityType, style, label) {
                     return L.geoJSON(data, {
-                        filter: function(feature) {
-                            return feature.properties.amenity === amenityType;
-                        },
-                        pointToLayer: function (feature, latlng) {
-                            return L.circleMarker(latlng, style);
-                        },
+                        filter: function(feature) { return feature.properties.amenity === amenityType; },
+                        pointToLayer: function (feature, latlng) { return L.circleMarker(latlng, style); },
                         onEachFeature: function (feature, layer) {
                             layer.on('click', function() {
                                 const props = feature.properties;
@@ -257,29 +257,66 @@
                 primaryLayer = createSchoolLayer(schoolData, 'school', primaryMarkerStyle, 'Primary / Fundamental').addTo(map);
                 secondaryLayer = createSchoolLayer(schoolData, 'college', secondaryMarkerStyle, 'Secondary / College').addTo(map);
 
-                // Add Layer Control at Bottom Left
+                // Process Armed Conflict Data
+                conflictLayer = L.layerGroup();
+                Papa.parse(conflictData, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        results.data.forEach(function(row) {
+                            if (row.latitude && row.longitude) {
+                                // Categorization logic
+                                var type = "Armed Conflict";
+                                var typeCode = parseInt(row.type_of_violence);
+                                var headline = (row.source_headline || "").toLowerCase();
+                                
+                                if (typeCode === 1) type = "State Conflict (Gov vs Group)";
+                                else if (typeCode === 2) type = "Non-State Conflict (Gang vs Gang)";
+                                else if (typeCode === 3) {
+                                    if (headline.includes("massacre")) type = "Massacre";
+                                    else if (headline.includes("protest") || headline.includes("demonstration")) type = "Political Repression";
+                                    else type = "Attack on Civilians";
+                                }
+
+                                var marker = L.marker([parseFloat(row.latitude), parseFloat(row.longitude)], {
+                                    icon: L.divIcon({ className: 'conflict-diamond' })
+                                });
+
+                                marker.on('click', function() {
+                                    document.getElementById('details-section').querySelector('h3').innerHTML = "Armed Conflict Details";
+                                    const html = `<div style="color: #000; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${type}</div>` +
+                                                 `<strong>Date:</strong> ${row.source_date || row.year}<br>` +
+                                                 `<strong>Location:</strong> ${row.where_description || row.adm_2 || "Unknown"}<br>` +
+                                                 `<strong>Generated by:</strong> ${row.side_a} ${row.side_b ? " vs " + row.side_b : ""}<br>` +
+                                                 `<strong>Headline:</strong> <em>${row.source_headline || "No headline available"}</em><br>` +
+                                                 `<strong>Fatalities (Best):</strong> ${row.best || 0}`;
+                                    document.getElementById('details-content').innerHTML = html;
+                                });
+                                
+                                marker.addTo(conflictLayer);
+                            }
+                        });
+                        conflictLayer.addTo(map);
+                    }
+                });
+
                 var overlays = {
                     "<span style='color: #ff9800; font-weight: bold;'>Primary Schools</span>": primaryLayer,
-                    "<span style='color: #5d4037; font-weight: bold;'>Secondary Schools</span>": secondaryLayer
+                    "<span style='color: #5d4037; font-weight: bold;'>Secondary Schools</span>": secondaryLayer,
+                    "<span style='color: #000; font-weight: bold;'>Armed Conflict</span>": conflictLayer
                 };
                 layerControl = L.control.layers(null, overlays, { 
                     collapsed: false,
                     position: 'bottomleft'
                 }).addTo(map);
 
-                // Zoom to the extent of all schools
                 var combinedBounds = primaryLayer.getBounds().extend(secondaryLayer.getBounds());
-                map.flyToBounds(combinedBounds, { 
-                    padding: [50, 50], 
-                    duration: 2,
-                    easeLinearity: 0.25
-                });
+                map.flyToBounds(combinedBounds, { padding: [50, 50], duration: 2, easeLinearity: 0.25 });
             });
             
             document.getElementById('project-button').innerHTML = "back to national map";
         }
 
-        // 10. Button Logic: Toggle between views
         document.getElementById('project-button').onclick = function() {
             if (this.innerHTML === "click here to see the project") {
                 showProject();
@@ -288,7 +325,6 @@
             }
         };
 
-        // Start with Haiti view
         showHaiti();
     </script>
 </body>
