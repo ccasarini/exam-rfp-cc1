@@ -33,20 +33,40 @@
         #map { flex-grow: 1; height: 100vh; position: relative; }
         
         /* Sidebar Content */
-        h2 { color: #333; margin-top: 0; font-size: 1.5rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 10px; }
-        h3 { font-size: 1.1rem; color: #666; margin-bottom: 10px; }
-        .sidebar-section { margin-bottom: 30px; }
+        h2 { color: #1a1a1a; margin-top: 0; font-size: 1.6rem; border-bottom: 3px solid #e8f5e9; padding-bottom: 12px; font-weight: 800; }
+        h3 { font-size: 1.25rem; color: #333; margin-top: 15px; margin-bottom: 12px; font-weight: 700; line-height: 1.4; }
+        .sidebar-section { margin-bottom: 25px; }
         .details-box {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
+            background-color: #ffffff;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
             min-height: 120px;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            font-size: 1rem;
+            line-height: 1.6;
             color: #444;
             overflow-y: auto;
-            max-height: 300px;
+            max-height: 350px;
+            border-left: 5px solid #333; /* Default accent */
+        }
+        
+        .detail-item {
+            margin-bottom: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        .detail-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #888;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        .detail-value {
+            font-weight: 500;
+            color: #222;
         }
         
         /* 4. Interactive button in Sidebar */
@@ -278,10 +298,11 @@
                             layer.on('click', function() {
                                 const props = feature.properties;
                                 document.getElementById('details-section').querySelector('h3').innerHTML = "Institution Details";
-                                const html = `<div style="color: ${style.fillColor}; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${props.name || "Unnamed School"}</div>` +
-                                             `<strong>Type:</strong> ${label}<br>` +
-                                             `<strong>OSM ID:</strong> ${props.osm_id || "N/A"}<br>` +
-                                             `<strong>Coordinates:</strong> ${feature.geometry.coordinates[1].toFixed(4)}, ${feature.geometry.coordinates[0].toFixed(4)}`;
+                                document.getElementById('details-content').style.borderLeftColor = style.fillColor;
+                                const html = `<div style="color: ${style.fillColor}; font-weight: 800; margin-bottom: 12px; font-size: 1.2rem; line-height: 1.2;">${props.name || "Unnamed School"}</div>` +
+                                             `<div class="detail-item"><span class="detail-label">Type</span><span class="detail-value">${label}</span></div>` +
+                                             `<div class="detail-item"><span class="detail-label">OSM ID</span><span class="detail-value">${props.osm_id || "N/A"}</span></div>` +
+                                             `<div class="detail-item"><span class="detail-label">Coordinates</span><span class="detail-value">${feature.geometry.coordinates[1].toFixed(4)}, ${feature.geometry.coordinates[0].toFixed(4)}</span></div>`;
                                 document.getElementById('details-content').innerHTML = html;
                             });
                         }
@@ -353,11 +374,12 @@
 
                                 marker.on('click', function() {
                                     document.getElementById('details-section').querySelector('h3').innerHTML = category;
-                                    const html = `<div style="color: #d32f2f; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">Event Details</div>` +
-                                                 `<strong>Date:</strong> ${row.date_event ? row.date_event.split(' ')[0] : row.year}<br>` +
-                                                 `<strong>Location:</strong> ${row.where_coordinates || row.adm_2 || "Unknown"}<br>` +
-                                                 `<strong>Participants:</strong> ${row.side_a} vs ${row.side_b || "Unknown"}<br>` +
-                                                 `<strong>Fatalities:</strong> ${row.total_deaths_best_estimate || 0}`;
+                                    document.getElementById('details-content').style.borderLeftColor = "#d32f2f";
+                                    const html = `<div style="color: #d32f2f; font-weight: 800; margin-bottom: 12px; font-size: 1.2rem; line-height: 1.2;">Event Details</div>` +
+                                                 `<div class="detail-item"><span class="detail-label">Date</span><span class="detail-value">${row.date_event ? row.date_event.split(' ')[0] : row.year}</span></div>` +
+                                                 `<div class="detail-item"><span class="detail-label">Location</span><span class="detail-value">${row.where_coordinates || row.adm_2 || "Unknown"}</span></div>` +
+                                                 `<div class="detail-item"><span class="detail-label">Participants</span><span class="detail-value">${row.side_a} vs ${row.side_b || "Unknown"}</span></div>` +
+                                                 `<div class="detail-item"><span class="detail-label">Fatalities</span><span class="detail-value">${row.total_deaths_best_estimate || 0}</span></div>`;
                                     document.getElementById('details-content').innerHTML = html;
                                 });
                                 marker.addTo(conflictLayer);
