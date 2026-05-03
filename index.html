@@ -268,7 +268,8 @@
                     skipEmptyLines: true,
                     complete: function(results) {
                         results.data.forEach(function(row) {
-                            if (row.latitude && row.longitude) {
+                            // Filter: Only show events in the Ouest department (Port-au-Prince area)
+                            if (row.latitude && row.longitude && row.adm_1 === 'Ouest department') {
                                 // Categorization logic
                                 var type = "Armed Conflict";
                                 var typeCode = parseInt(row.type_of_violence);
