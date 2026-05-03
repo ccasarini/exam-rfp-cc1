@@ -228,7 +228,7 @@
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
             const loadSchools = fetch('data/schools/ouest_schools.geojson').then(r => r.json());
-            const loadConflicts = fetch('data/haiti_ucdp_conflict.csv').then(r => r.text());
+            const loadConflicts = fetch('data/armed_conflicts/haiti_ucdp_conflict_cleaned.csv').then(r => r.text());
 
             Promise.all([loadPaup, loadLines, loadSchools, loadConflicts]).then(([paupData, linesData, schoolData, conflictData]) => {
                 currentLayer = L.geoJSON(paupData, { 
@@ -261,6 +261,36 @@
                 primaryLayer = createSchoolLayer(schoolData, 'school', primaryMarkerStyle, 'Primary / Fundamental').addTo(map);
                 secondaryLayer = createSchoolLayer(schoolData, 'college', secondaryMarkerStyle, 'Secondary / College').addTo(map);
 
+                // Helper for categorization
+                function getCategory(headline) {
+                    headline = (headline || "").toLowerCase();
+                    if (headline.includes("shot dead") || headline.includes("murdered") || headline.includes("assassination") || headline.includes("journalist killed") || headline.includes("student shot") || headline.includes("mechanic shot") || headline.includes("abattu") || headline.includes("tué") || headline.includes("assassinat")) {
+                        return "Targeted Assassinations and Extrajudicial Killings";
+                    }
+                    if (headline.includes("massacre") || headline.includes("carnage") || headline.includes("raid") || headline.includes("houses set on fire") || headline.includes("fires") || headline.includes("incendie")) {
+                        return "Large-Scale Massacres and Neighborhood Raids";
+                    }
+                    if (headline.includes("police operation") || headline.includes("opération de la pnh") || headline.includes("clash with the police") || headline.includes("pnh regains control") || headline.includes("pnh killed") || headline.includes("pnh report") || headline.includes("agents of haitian anti-gang police unit killed")) {
+                        return "Police Operations and State Security Clashes";
+                    }
+                    if (headline.includes("gang war") || headline.includes("gang vs gang") || headline.includes("clash between armed gangs") || headline.includes("viv ansanm") || headline.includes("g9") || headline.includes("g-pep") || headline.includes("armed clashes") || headline.includes("gang leader killed") || headline.includes("gang leader injured") || headline.includes("fury of the armed gangs")) {
+                        return "Inter-Gang Warfare (Inter-necine Conflict)";
+                    }
+                    if (headline.includes("kidnapped") || headline.includes("kidnapping") || headline.includes("hostage") || headline.includes("rape") || headline.includes("viol") || headline.includes("tortured")) {
+                        return "Kidnappings and Sexual Violence";
+                    }
+                    if (headline.includes("national palace") || headline.includes("prison") || headline.includes("jailbreak") || headline.includes("penitentiary") || headline.includes("hospital") || headline.includes("airport") || headline.includes("ship") || headline.includes("centre-ville") || headline.includes("city center")) {
+                        return "Attacks on Strategic Infrastructure";
+                    }
+                    if (headline.includes("demonstration") || headline.includes("protest") || headline.includes("manifestation") || headline.includes("popular mobilization")) {
+                        return "Civil Unrest and Protests";
+                    }
+                    if (headline.includes("flee") || headline.includes("displacement") || headline.includes("trapped") || headline.includes("evacuation") || headline.includes("homeless") || headline.includes("refugee") || headline.includes("fuite")) {
+                        return "Humanitarian Crisis and Mass Displacement";
+                    }
+                    return "Armed Conflict Event";
+                }
+
                 // Process Armed Conflict Data
                 conflictLayer = L.layerGroup();
                 Papa.parse(conflictData, {
@@ -268,22 +298,20 @@
                     skipEmptyLines: true,
                     complete: function(results) {
                         results.data.forEach(function(row) {
-                            // Filter: Only show events in the Ouest department (Port-au-Prince area)
-                            if (row.latitude && row.longitude && row.adm_1 === 'Ouest department') {
-                                // Categorization logic
-                                var type = "Armed Conflict";
-                                var typeCode = parseInt(row.type_of_violence);
-                                var headline = (row.source_headline || "").toLowerCase();
-                                
-                                if (typeCode === 1) type = "State Conflict (Gov vs Group)";
-                                else if (typeCode === 2) type = "Non-State Conflict (Gang vs Gang)";
-                                else if (typeCode === 3) {
-                                    if (headline.includes("massacre")) type = "Massacre";
-                                    else if (headline.includes("protest") || headline.includes("demonstration")) type = "Political Repression";
-                                    else type = "Attack on Civilians";
+                            // Extract coordinates from geom_wkt: POINT (-72.335 18.53917)
+                            var lat, lon;
+                            if (row.geom_wkt) {
+                                var coords = row.geom_wkt.match(/POINT\s*\(([-\d.]+)\s+([-\d.]+)\)/);
+                                if (coords) {
+                                    lon = parseFloat(coords[1]);
+                                    lat = parseFloat(coords[2]);
                                 }
-
-                                var marker = L.marker([parseFloat(row.latitude), parseFloat(row.longitude)], {
+                            }
+                            
+                            if (lat && lon) {
+                                var category = getCategory(row.source_headline);
+                                
+                                var marker = L.marker([lat, lon], {
                                     icon: L.divIcon({ 
                                         className: 'conflict-icon-container',
                                         html: '<div class="conflict-diamond"></div>',
@@ -294,15 +322,20 @@
 
                                 marker.on('click', function() {
                                     document.getElementById('details-section').querySelector('h3').innerHTML = "Armed Conflict Details";
-                                    const html = `<div style="color: #000; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${type}</div>` +
-                                                 `<strong>Date:</strong> ${row.source_date || row.year}<br>` +
-                                                 `<strong>Location:</strong> ${row.where_description || row.adm_2 || "Unknown"}<br>` +
+                                    const html = `<div style="color: #d32f2f; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${category}</div>` +
+                                                 `<strong>Date:</strong> ${row.date_event ? row.date_event.split(' ')[0] : row.year}<br>` +
+                                                 `<strong>Location:</strong> ${row.where_coordinates || row.adm_2 || "Unknown"}<br>` +
                                                  `<strong>Generated by:</strong> ${row.side_a} ${row.side_b ? " vs " + row.side_b : ""}<br>` +
-                                                 `<strong>Headline:</strong> <em>${row.source_headline || "No headline available"}</em><br>` +
-                                                 `<strong>Fatalities (Best):</strong> ${row.best || 0}`;
+                                                 `<strong>Fatalities:</strong> ${row.total_deaths_best_estimate || 0}`;
                                     document.getElementById('details-content').innerHTML = html;
                                 });
                                 
+                                marker.bindPopup(`<strong>${category}</strong><br>` +
+                                                 `Date: ${row.date_event ? row.date_event.split(' ')[0] : row.year}<br>` +
+                                                 `Location: ${row.where_coordinates || row.adm_2 || "Unknown"}<br>` +
+                                                 `Generated by: ${row.side_a} ${row.side_b ? " vs " + row.side_b : ""}<br>` +
+                                                 `Fatalities: ${row.total_deaths_best_estimate || 0}`);
+
                                 marker.addTo(conflictLayer);
                             }
                         });

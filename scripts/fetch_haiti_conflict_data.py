@@ -7,7 +7,7 @@ def fetch_ucdp_haiti_data():
     Fetches the UCDP GED dataset for Haiti from HDX by querying the HDX API.
     """
     hdx_api_url = "https://data.humdata.org/api/3/action/package_show?id=ucdp-data-for-haiti"
-    output_path = "data/haiti_ucdp_conflict.csv"
+    output_path = "data/armed_conflicts/haiti_ucdp_conflict.csv"
     
     print(f"Querying HDX API for the latest UCDP Haiti data...")
     
@@ -70,7 +70,7 @@ def fetch_acled_haiti_data(email, api_key):
         "key": api_key,
         "country": "Haiti"
     }
-    output_path = "data/haiti_acled_conflict.csv"
+    output_path = "data/armed_conflicts/haiti_acled_conflict.csv"
     
     print(f"Fetching ACLED Haiti data using API...")
     

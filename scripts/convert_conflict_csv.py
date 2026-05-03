@@ -44,5 +44,5 @@ def csv_to_geojson(csv_file, geojson_file):
         json.dump(geojson, f, indent=2)
 
 if __name__ == "__main__":
-    csv_to_geojson('ouest_armedconflict_cleaned.csv', 'data/ouest_conflict.geojson')
-    print("Converted ouest_armedconflict_cleaned.csv to data/ouest_conflict.geojson")
+    csv_to_geojson('data/armed_conflicts/haiti_ucdp_conflict_cleaned.csv', 'data/armed_conflicts/ouest_conflict.geojson')
+    print("Converted conflict data to data/armed_conflicts/ouest_conflict.geojson")
