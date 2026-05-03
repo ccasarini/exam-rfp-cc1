@@ -70,15 +70,18 @@
         }
 
         /* Conflict Marker Style */
+        .conflict-icon-container {
+            background: transparent !important;
+            border: none !important;
+        }
         .conflict-diamond {
             background-color: #000;
             transform: rotate(45deg);
             border: 1px solid #fff;
-            width: 9px !important;
-            height: 9px !important;
-            margin-left: -4.5px !important;
-            margin-top: -4.5px !important;
+            width: 8px;
+            height: 8px;
             box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+            margin: 2px; /* Centers it within the iconSize */
         }
 
         /* Right side title */
@@ -280,7 +283,12 @@
                                 }
 
                                 var marker = L.marker([parseFloat(row.latitude), parseFloat(row.longitude)], {
-                                    icon: L.divIcon({ className: 'conflict-diamond' })
+                                    icon: L.divIcon({ 
+                                        className: 'conflict-icon-container',
+                                        html: '<div class="conflict-diamond"></div>',
+                                        iconSize: [12, 12],
+                                        iconAnchor: [6, 6]
+                                    })
                                 });
 
                                 marker.on('click', function() {
