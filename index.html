@@ -294,25 +294,25 @@
                 // Helper for categorization
                 function getCategory(headline) {
                     headline = (headline || "").toLowerCase();
-                    if (headline.includes("shot dead") || headline.includes("murdered") || headline.includes("assassination") || headline.includes("journalist killed") || headline.includes("student shot") || headline.includes("mechanic shot") || headline.includes("abattu") || headline.includes("tué") || headline.includes("assassinat") || headline.includes("repression")) {
+                    if (headline.includes("shot dead") || headline.includes("murdered") || headline.includes("assassination") || headline.includes("journalist killed") || headline.includes("student shot") || headline.includes("mechanic shot") || headline.includes("abattu") || headline.includes("tué") || headline.includes("assassinat") || headline.includes("repression") || headline.includes("execution") || headline.includes("beheaded") || headline.includes("decapitation")) {
                         return "Targeted Assassinations and Political Repression";
                     }
-                    if (headline.includes("massacre") || headline.includes("carnage") || headline.includes("raid") || headline.includes("houses set on fire") || headline.includes("fires") || headline.includes("incendie")) {
+                    if (headline.includes("massacre") || headline.includes("carnage") || headline.includes("raid") || headline.includes("houses set on fire") || headline.includes("fires") || headline.includes("incendie") || headline.includes("corpses") || headline.includes("cadavres") || headline.includes("bodies found") || headline.includes("mass killings")) {
                         return "Large-Scale Massacres and Neighborhood Raids";
                     }
-                    if (headline.includes("police operation") || headline.includes("opération de la pnh") || headline.includes("clash with the police") || headline.includes("pnh regains control") || headline.includes("pnh killed") || headline.includes("pnh report") || headline.includes("agents of haitian anti-gang police unit killed")) {
+                    if (headline.includes("police operation") || headline.includes("opération de la pnh") || headline.includes("clash with the police") || headline.includes("pnh regains control") || headline.includes("pnh killed") || headline.includes("pnh report") || headline.includes("agents of haitian anti-gang police unit killed") || headline.includes("bandits shot dead") || headline.includes("repels attack") || headline.includes("stronghold") || headline.includes("police raid")) {
                         return "Police Operations and State Security Clashes";
                     }
-                    if (headline.includes("gang war") || headline.includes("gang vs gang") || headline.includes("clash between armed gangs") || headline.includes("viv ansanm") || headline.includes("g9") || headline.includes("g-pep") || headline.includes("armed clashes") || headline.includes("gang leader killed") || headline.includes("gang leader injured") || headline.includes("fury of the armed gangs")) {
+                    if (headline.includes("gang war") || headline.includes("gang vs gang") || headline.includes("clash between armed gangs") || headline.includes("viv ansanm") || headline.includes("g9") || headline.includes("g-pep") || headline.includes("armed clashes") || headline.includes("gang leader killed") || headline.includes("gang leader injured") || headline.includes("fury of the armed gangs") || headline.includes("gang coalition") || headline.includes("bandits routed") || headline.includes("gangs unleash") || headline.includes("gangs target") || headline.includes("gang attacks") || headline.includes("armed groups")) {
                         return "Inter-Gang Warfare (Inter-necine Conflict)";
                     }
                     if (headline.includes("kidnapped") || headline.includes("kidnapping") || headline.includes("hostage") || headline.includes("rape") || headline.includes("viol") || headline.includes("tortured")) {
                         return "Kidnappings and Sexual Violence";
                     }
-                    if (headline.includes("national palace") || headline.includes("prison") || headline.includes("jailbreak") || headline.includes("penitentiary") || headline.includes("hospital") || headline.includes("airport") || headline.includes("ship") || headline.includes("centre-ville") || headline.includes("city center")) {
+                    if (headline.includes("national palace") || headline.includes("prison") || headline.includes("jailbreak") || headline.includes("penitentiary") || headline.includes("hospital") || headline.includes("airport") || headline.includes("ship") || headline.includes("centre-ville") || headline.includes("city center") || headline.includes("police station") || headline.includes("commissariat") || headline.includes("sous-commissariat")) {
                         return "Attacks on Strategic Infrastructure";
                     }
-                    if (headline.includes("demonstration") || headline.includes("protest") || headline.includes("manifestation") || headline.includes("popular mobilization")) {
+                    if (headline.includes("demonstration") || headline.includes("protest") || headline.includes("manifestation") || headline.includes("popular mobilization") || headline.includes("unrest") || headline.includes("riots")) {
                         return "Civil Unrest and Protests";
                     }
                     if (headline.includes("flee") || headline.includes("displacement") || headline.includes("trapped") || headline.includes("evacuation") || headline.includes("homeless") || headline.includes("refugee") || headline.includes("fuite")) {
@@ -352,13 +352,12 @@
                                 });
 
                                 marker.on('click', function() {
-                                    document.getElementById('details-section').querySelector('h3').innerHTML = "Armed Conflict Details";
-                                    const html = `<div style="color: #d32f2f; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${category}</div>` +
+                                    document.getElementById('details-section').querySelector('h3').innerHTML = category;
+                                    const html = `<div style="color: #d32f2f; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">Event Details</div>` +
                                                  `<strong>Date:</strong> ${row.date_event ? row.date_event.split(' ')[0] : row.year}<br>` +
                                                  `<strong>Location:</strong> ${row.where_coordinates || row.adm_2 || "Unknown"}<br>` +
                                                  `<strong>Participants:</strong> ${row.side_a} vs ${row.side_b || "Unknown"}<br>` +
-                                                 `<strong>Fatalities:</strong> ${row.total_deaths_best_estimate || 0}<br>` +
-                                                 `<div style="font-size: 0.8rem; color: #666; margin-top: 10px; font-style: italic;">Headline: ${row.source_headline || "N/A"}</div>`;
+                                                 `<strong>Fatalities:</strong> ${row.total_deaths_best_estimate || 0}`;
                                     document.getElementById('details-content').innerHTML = html;
                                 });
                                 marker.addTo(conflictLayer);
