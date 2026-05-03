@@ -116,8 +116,9 @@
 
         var currentLayer;
         var landBordersLayer;
-        var schoolLayer; // Layer for school markers
-        var layerControl; // Control for toggling layers
+        var primaryLayer;   // Layer for primary schools
+        var secondaryLayer; // Layer for secondary schools
+        var layerControl;   // Control for toggling layers
         var isFirstLoad = true;
 
         // --- STEP 2: Refine Styles ---
@@ -129,9 +130,18 @@
         };
 
         // Style for school markers
-        var schoolMarkerStyle = {
+        var primaryMarkerStyle = {
             radius: 6,
-            fillColor: "#ff9800", // Orange
+            fillColor: "#ff9800", // Standard Orange
+            color: "#fff",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        };
+
+        var secondaryMarkerStyle = {
+            radius: 6,
+            fillColor: "#e65100", // Darker Orange
             color: "#fff",
             weight: 1,
             opacity: 1,
@@ -156,7 +166,8 @@
         function showHaiti() {
             if (currentLayer) map.removeLayer(currentLayer);
             if (landBordersLayer) map.removeLayer(landBordersLayer);
-            if (schoolLayer) map.removeLayer(schoolLayer);
+            if (primaryLayer) map.removeLayer(primaryLayer);
+            if (secondaryLayer) map.removeLayer(secondaryLayer);
             if (layerControl) {
                 map.removeControl(layerControl);
                 layerControl = null;
@@ -182,11 +193,11 @@
             document.getElementById('project-button').innerHTML = "click here to see the project";
         }
 
-        // 9. Function to show Port-au-Prince (Land-only Dark Grey Profile)
         function showProject() {
             if (currentLayer) map.removeLayer(currentLayer);
             if (landBordersLayer) map.removeLayer(landBordersLayer);
-            if (schoolLayer) map.removeLayer(schoolLayer);
+            if (primaryLayer) map.removeLayer(primaryLayer);
+            if (secondaryLayer) map.removeLayer(secondaryLayer);
             if (layerControl) {
                 map.removeControl(layerControl);
                 layerControl = null;
@@ -196,7 +207,7 @@
             document.getElementById('details-section').style.display = 'block';
             document.getElementById('map-title').style.display = 'block';
             document.getElementById('map-title').innerHTML = "Greater Port-au-Prince Area";
-            document.getElementById('details-content').innerHTML = "Use the <strong>Layer Control</strong> (top-right) to toggle data. Click markers for details.";
+            document.getElementById('details-content').innerHTML = "Use the <strong>Layer Control</strong> (bottom-left) to toggle schools. Click markers for details.";
 
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
@@ -220,32 +231,45 @@
                     }
                 }).addTo(map);
 
-                // Create School Layer
-                schoolLayer = L.geoJSON(schoolData, {
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, schoolMarkerStyle);
-                    },
-                    onEachFeature: function (feature, layer) {
-                        layer.on('click', function() {
-                            const props = feature.properties;
-                            document.getElementById('details-section').querySelector('h3').innerHTML = "Institution Details";
-                            const html = `<div style="color: #ff9800; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${props.name || "Unnamed School"}</div>` +
-                                         `<strong>Type:</strong> ${props.amenity || "N/A"}<br>` +
-                                         `<strong>OSM ID:</strong> ${props.osm_id || "N/A"}<br>` +
-                                         `<strong>Coordinates:</strong> ${feature.geometry.coordinates[1].toFixed(4)}, ${feature.geometry.coordinates[0].toFixed(4)}`;
-                            document.getElementById('details-content').innerHTML = html;
-                        });
-                    }
+                // Helper to create school layers
+                function createSchoolLayer(data, amenityType, style, label) {
+                    return L.geoJSON(data, {
+                        filter: function(feature) {
+                            return feature.properties.amenity === amenityType;
+                        },
+                        pointToLayer: function (feature, latlng) {
+                            return L.circleMarker(latlng, style);
+                        },
+                        onEachFeature: function (feature, layer) {
+                            layer.on('click', function() {
+                                const props = feature.properties;
+                                document.getElementById('details-section').querySelector('h3').innerHTML = "Institution Details";
+                                const html = `<div style="color: ${style.fillColor}; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${props.name || "Unnamed School"}</div>` +
+                                             `<strong>Type:</strong> ${label}<br>` +
+                                             `<strong>OSM ID:</strong> ${props.osm_id || "N/A"}<br>` +
+                                             `<strong>Coordinates:</strong> ${feature.geometry.coordinates[1].toFixed(4)}, ${feature.geometry.coordinates[0].toFixed(4)}`;
+                                document.getElementById('details-content').innerHTML = html;
+                            });
+                        }
+                    });
+                }
+
+                primaryLayer = createSchoolLayer(schoolData, 'school', primaryMarkerStyle, 'Primary / Fundamental').addTo(map);
+                secondaryLayer = createSchoolLayer(schoolData, 'college', secondaryMarkerStyle, 'Secondary / College').addTo(map);
+
+                // Add Layer Control at Bottom Left
+                var overlays = {
+                    "<span style='color: #ff9800; font-weight: bold;'>Primary Schools</span>": primaryLayer,
+                    "<span style='color: #e65100; font-weight: bold;'>Secondary Schools</span>": secondaryLayer
+                };
+                layerControl = L.control.layers(null, overlays, { 
+                    collapsed: false,
+                    position: 'bottomleft'
                 }).addTo(map);
 
-                // Add Layer Control
-                var overlays = {
-                    "<span style='color: #ff9800; font-weight: bold;'>Schools</span>": schoolLayer
-                };
-                layerControl = L.control.layers(null, overlays, { collapsed: false }).addTo(map);
-
-                // Zoom to the extent of all schools for a better overview of the region
-                map.flyToBounds(schoolLayer.getBounds(), { 
+                // Zoom to the extent of all schools
+                var combinedBounds = primaryLayer.getBounds().extend(secondaryLayer.getBounds());
+                map.flyToBounds(combinedBounds, { 
                     padding: [50, 50], 
                     duration: 2,
                     easeLinearity: 0.25
