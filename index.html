@@ -70,14 +70,14 @@
         }
 
         /* Conflict Marker Style */
-        .conflict-diamond {
+        .conflict-rhombus {
             background-color: #000;
-            transform: rotate(45deg);
+            transform: rotate(45deg) scale(0.7, 1.1);
             border: 1px solid #fff;
-            width: 8px !important;
-            height: 8px !important;
-            margin-left: -4px !important;
-            margin-top: -4px !important;
+            width: 10px !important;
+            height: 10px !important;
+            margin-left: -5px !important;
+            margin-top: -5px !important;
         }
 
         /* Right side title */
@@ -279,7 +279,7 @@
                                 }
 
                                 var marker = L.marker([parseFloat(row.latitude), parseFloat(row.longitude)], {
-                                    icon: L.divIcon({ className: 'conflict-diamond' })
+                                    icon: L.divIcon({ className: 'conflict-rhombus' })
                                 });
 
                                 marker.on('click', function() {
