@@ -27,21 +27,46 @@ def fetch_and_filter_schools():
         zip_ref.extractall(EXTRACT_PATH)
 
     # Step D: Load the data into GeoPandas
-    # We look for the .geojson file inside the extracted folder
     geojson_file = [f for f in os.listdir(EXTRACT_PATH) if f.endswith('.geojson')][0]
     all_schools = gpd.read_file(os.path.join(EXTRACT_PATH, geojson_file))
     
-    # Step E: Load Administrative Boundaries (Level 1 - Departments)
+    # Step E: Filter for primary and secondary schools
+    print("Filtering for primary and secondary schools...")
+    # 1. Amenity-based filter
+    allowed_amenities = ['school', 'college']
+    all_schools = all_schools[all_schools['amenity'].isin(allowed_amenities)]
+    
+    # 2. Name-based filter to exclude universities and kindergartens tagged as schools
+    exclude_keywords = [
+        'université', 'university', 'faculté', 'faculty', 
+        'jardin d\'enfants', 'kindergarten', 'preschool', 'garderie'
+    ]
+    def is_valid_school(name):
+        if not name: return True
+        name_lower = str(name).lower()
+        return not any(keyword in name_lower for keyword in exclude_keywords)
+
+    all_schools = all_schools[all_schools['name'].apply(is_valid_school)]
+
+    # Step F: Clean names (Title Case)
+    def clean_name(name):
+        if not name: return name
+        # If name is all uppercase or has weird casing, Title Case it
+        return str(name).title()
+
+    all_schools['name'] = all_schools['name'].apply(clean_name)
+
+    # Step G: Load Administrative Boundaries (Level 1 - Departments)
     print("Loading Ouest department boundary...")
     admin1 = gpd.read_file(ADMIN1_BOUNDARY_PATH)
     # Filter for Ouest department (Pcode HT01)
     ouest_boundary = admin1[admin1['adm1_pcode'] == 'HT01']
 
-    # Step F: Filter (Clip) the schools to only those inside the Ouest boundary
+    # Step H: Filter (Clip) the schools to only those inside the Ouest boundary
     print("Filtering schools for Ouest department...")
     ouest_schools = gpd.clip(all_schools, ouest_boundary)
 
-    # Step G: Save the result
+    # Step I: Save the result
     ouest_schools.to_file(OUTPUT_PATH, driver='GeoJSON')
     print(f"Success! {len(ouest_schools)} schools saved to {OUTPUT_PATH}")
 
