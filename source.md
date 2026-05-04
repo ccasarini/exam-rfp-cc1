@@ -16,11 +16,11 @@ The data includes:
 - **Admin Level 1:** Departments
 - **Admin Level 2:** Arrondissements
 - **Admin Level 3:** Communes
-
-## Population Density
+## Population Density (School-Age 6-15)
 
 The population distribution data is sourced from **Kontur Population**, specifically the dataset for Haiti available on the **Humanitarian Data Exchange (HDX)**.
 
+### Choice of Source
 During the research phase, several gridded population datasets were evaluated:
 - **WorldPop** (High-resolution ML-based demographics)
 - **GPWv4** (Gridded Population of the World, Version 4)
@@ -28,9 +28,15 @@ During the research phase, several gridded population datasets were evaluated:
 - **GlobPOP** (Annual global population dataset)
 - **Kontur Population** (H3 Hexagonal Grid)
 
-I specifically selected **Kontur Population** because of its use of the **H3 hexagonal grid** (400m resolution). Hexagons provide a higher level of spatial precision and consistency compared to traditional square grids, as the distance between the center of any cell and all its neighbors is identical. This makes the population density layer much more accurate for analyzing local clusters and urban distribution in the Ouest department.
+I specifically selected **Kontur Population** because of its use of the **H3 hexagonal grid** (400m resolution). Hexagons provide a higher level of spatial precision and consistency compared to traditional square grids, as the distance between the center of any cell and all its neighbors is identical.
+
+### Age Range Relevance (6-15 Years Old)
+For this project, which focuses on **education in armed conflict areas**, total population data was refined to represent children in the typical age range for primary and secondary school (**6 to 15 years old**, inclusive). 
+
+Since spatial age-disaggregated grids are often modeled at lower resolutions, I maintained the high-precision Kontur hexagonal grid and applied a demographic factor of **20.8%** to the total population counts. This percentage is derived from the **UN Population Prospects (2023/2024)** for Haiti, representing the estimated proportion of the population within the 6-15 age bracket. This ensures the map displays information directly relevant to the school-age population most impacted by conflict and educational disruption.
 
 The processed population density file for the Ouest department is stored in `data/population/ouest_population_400m.geojson`. For more detailed information on the dataset, you can explore the [data/population/](data/population/) folder.
+
 
 ## School Locations
 
