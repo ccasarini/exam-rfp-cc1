@@ -36,3 +36,5 @@ For the analysis of armed conflict events, I researched several open-source data
 - **UCDP GED** (Uppsala Conflict Data Program - Georeferenced Event Dataset)
 
 Among these options, I chose **UCDP GED** as the primary data source because of its **academic rigour and precision**. This dataset provides highly verified and reliable georeferenced information on conflict events, which is essential for a precise analysis of the security landscape in Haiti.
+
+The armed conflict files are store in `data/armed_conflicts/`.
