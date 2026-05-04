@@ -1,0 +1,7 @@
+# Data files
+data/kontur_population_haiti.gpkg
+data/kontur_population_haiti.gpkg.gz
+
+# Python cache
+__pycache__/
+*.pyc

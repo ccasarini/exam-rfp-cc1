@@ -141,6 +141,28 @@
             pointer-events: none;
             border-left: 5px solid #ff9800;
         }
+        /* Legend Styles */
+        .info.legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            line-height: 1.5;
+            color: #333;
+            font-size: 0.85rem;
+        }
+        .info.legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+        .info.legend .legend-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -184,6 +206,8 @@
         var primaryLayer;   
         var secondaryLayer; 
         var conflictLayer;  
+        var popLayer;       // NEW: Population Layer
+        var popLegend;      // NEW: Legend for Population
         var allConflictData = [];
         var layerControl;   
         var isFirstLoad = true;
@@ -233,6 +257,11 @@
             if (primaryLayer) map.removeLayer(primaryLayer);
             if (secondaryLayer) map.removeLayer(secondaryLayer);
             if (conflictLayer) map.removeLayer(conflictLayer);
+            if (popLayer) map.removeLayer(popLayer);
+            if (popLegend) {
+                map.removeControl(popLegend);
+                popLegend = null;
+            }
             if (layerControl) {
                 map.removeControl(layerControl);
                 layerControl = null;
@@ -264,6 +293,11 @@
             if (primaryLayer) map.removeLayer(primaryLayer);
             if (secondaryLayer) map.removeLayer(secondaryLayer);
             if (conflictLayer) map.removeLayer(conflictLayer);
+            if (popLayer) map.removeLayer(popLayer);
+            if (popLegend) {
+                map.removeControl(popLegend);
+                popLegend = null;
+            }
             if (layerControl) {
                 map.removeControl(layerControl);
                 layerControl = null;
@@ -279,11 +313,54 @@
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
             const loadSchools = fetch('data/schools/ouest_schools.geojson').then(r => r.json());
             const loadConflicts = fetch('data/armed_conflicts/haiti_ucdp_conflict_cleaned.csv').then(r => r.text());
+            const loadPopulation = fetch('data/ouest_population_400m.geojson').then(r => r.json());
 
-            Promise.all([loadPaup, loadLines, loadSchools, loadConflicts]).then(([paupData, linesData, schoolData, conflictRaw]) => {
+            Promise.all([loadPaup, loadLines, loadSchools, loadConflicts, loadPopulation]).then(([paupData, linesData, schoolData, conflictRaw, popData]) => {
                 currentLayer = L.geoJSON(paupData, { 
                     style: { color: "transparent", fillColor: "transparent" } 
                 }).addTo(map);
+
+                // --- POPULATION LAYER LOGIC ---
+                function getPopColor(d) {
+                    return d > 5000 ? '#006d2c' :
+                           d > 1000 ? '#41ab5d' :
+                           d > 100  ? '#a1d99b' :
+                           d > 10   ? '#e5f5e0' :
+                                      '#f7fcf5';
+                }
+
+                function popStyle(feature) {
+                    return {
+                        fillColor: getPopColor(feature.properties.population),
+                        weight: 0.1,
+                        opacity: 1,
+                        color: 'white',
+                        fillOpacity: 0.7
+                    };
+                }
+
+                popLayer = L.geoJSON(popData, {
+                    style: popStyle,
+                    onEachFeature: function(feature, layer) {
+                        layer.bindTooltip("Population: " + Math.round(feature.properties.population), { sticky: true });
+                    }
+                }).addTo(map);
+
+                // --- POPULATION LEGEND ---
+                popLegend = L.control({position: 'bottomright'});
+                popLegend.onAdd = function (map) {
+                    var div = L.DomUtil.create('div', 'info legend'),
+                        grades = [0, 10, 100, 1000, 5000],
+                        labels = [];
+                    div.innerHTML = '<div class="legend-title">Population Density<br><small>(per 400m hexagon)</small></div>';
+                    for (var i = 0; i < grades.length; i++) {
+                        div.innerHTML +=
+                            '<i style="background:' + getPopColor(grades[i] + 1) + '"></i> ' +
+                            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                    }
+                    return div;
+                };
+                popLegend.addTo(map);
 
                 landBordersLayer = L.geoJSON(linesData, {
                     filter: function(feature) { return feature.properties.adm_level === 2; },
@@ -423,6 +500,7 @@
                 conflictLayer.addTo(map);
 
                 var overlays = {
+                    "<span style='color: #2e7d32; font-weight: bold;'>Population Density</span>": popLayer,
                     "<span style='color: #ff9800; font-weight: bold;'>Primary Schools</span>": primaryLayer,
                     "<span style='color: #5d4037; font-weight: bold;'>Secondary Schools</span>": secondaryLayer,
                     "<span style='color: #000; font-weight: bold;'>Armed Conflict</span>": conflictLayer
@@ -432,7 +510,19 @@
                     position: 'bottomleft'
                 }).addTo(map);
 
-                var combinedBounds = primaryLayer.getBounds().extend(secondaryLayer.getBounds());
+                // Handle legend visibility when layer is toggled
+                map.on('overlayadd', function (eventLayer) {
+                    if (eventLayer.name.includes("Population Density")) {
+                        popLegend.addTo(map);
+                    }
+                });
+                map.on('overlayremove', function (eventLayer) {
+                    if (eventLayer.name.includes("Population Density")) {
+                        map.removeControl(popLegend);
+                    }
+                });
+
+                var combinedBounds = primaryLayer.getBounds().extend(secondaryLayer.getBounds()).extend(popLayer.getBounds());
                 map.flyToBounds(combinedBounds, { padding: [50, 50], duration: 2, easeLinearity: 0.25 });
             });
             
