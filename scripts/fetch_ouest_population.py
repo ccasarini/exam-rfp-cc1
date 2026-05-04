@@ -10,10 +10,10 @@ def fetch_and_clip_population():
     population_url_gz = "https://geodata-eu-central-1-kontur-public.s3.eu-central-1.amazonaws.com/kontur_datasets/kontur_population_HT_20231101.gpkg.gz"
     
     # Paths for saving the data
-    compressed_path = "data/kontur_population_haiti.gpkg.gz"
-    raw_gpkg_path = "data/kontur_population_haiti.gpkg"
+    compressed_path = "data/population/kontur_population_haiti.gpkg.gz"
+    raw_gpkg_path = "data/population/kontur_population_haiti.gpkg"
     boundary_path = "data/borders/hti_admin1.geojson"
-    output_path = "data/ouest_population_400m.geojson"
+    output_path = "data/population/ouest_population_400m.geojson"
 
     # 2. DOWNLOAD THE DATA
     if not os.path.exists(raw_gpkg_path):

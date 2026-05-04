@@ -30,7 +30,7 @@ During the research phase, several gridded population datasets were evaluated:
 
 I specifically selected **Kontur Population** because of its use of the **H3 hexagonal grid** (400m resolution). Hexagons provide a higher level of spatial precision and consistency compared to traditional square grids, as the distance between the center of any cell and all its neighbors is identical. This makes the population density layer much more accurate for analyzing local clusters and urban distribution in the Ouest department.
 
-The processed population density file for the Ouest department is stored in `data/ouest_population_400m.geojson`.
+The processed population density file for the Ouest department is stored in `data/population/ouest_population_400m.geojson`. For more detailed information on the dataset, you can explore the [data/population/](data/population/) folder.
 
 ## School Locations
 

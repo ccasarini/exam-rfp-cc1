@@ -313,7 +313,7 @@
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
             const loadSchools = fetch('data/schools/ouest_schools.geojson').then(r => r.json());
             const loadConflicts = fetch('data/armed_conflicts/haiti_ucdp_conflict_cleaned.csv').then(r => r.text());
-            const loadPopulation = fetch('data/ouest_population_400m.geojson').then(r => r.json());
+            const loadPopulation = fetch('data/population/ouest_population_400m.geojson').then(r => r.json());
 
             Promise.all([loadPaup, loadLines, loadSchools, loadConflicts, loadPopulation]).then(([paupData, linesData, schoolData, conflictRaw, popData]) => {
                 currentLayer = L.geoJSON(paupData, { 
