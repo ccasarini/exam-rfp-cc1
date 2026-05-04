@@ -41,7 +41,7 @@ During the research phase, I investigated several sources for educational infras
 - **World Bank Open Data**
 - **HOTOSM (Humanitarian OpenStreetMap Team)**
 
-I chose **HOTOSM via HDX** as the primary source because it provides the most granular, georeferenced point data for schools in Haiti, allowing for direct integration into the interactive map. The school location files are stored in `data/schools/`.
+I chose **HOTOSM via HDX** as the primary source because it provides the most granular, georeferenced point data for schools in Haiti, allowing for direct integration into the interactive map. The school location files are stored in [data/schools/](data/schools/).
 
 ## Armed Conflict Data
 
