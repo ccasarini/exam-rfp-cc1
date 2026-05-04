@@ -13,6 +13,15 @@ The data includes:
 - **Admin Level 2:** Arrondissements
 - **Admin Level 3:** Communes
 
+## Population Density
+
+The population distribution data is sourced from **Kontur Population**, specifically the dataset for Haiti available on the **Humanitarian Data Exchange (HDX)**.
+
+### Choice of Source
+During the research phase, several gridded population datasets were evaluated (such as WorldPop and GPWv4). I specifically selected **Kontur Population** because of its use of the **H3 hexagonal grid** (400m resolution). Hexagons provide a higher level of spatial precision and consistency compared to traditional square grids, as the distance between the center of any cell and all its neighbors is identical. This makes the population density layer much more accurate for analyzing local clusters and urban distribution in the Ouest department.
+
+The processed population density file for the Ouest department is stored in `data/ouest_population_400m.geojson`.
+
 ## School Locations
 
 The data for school locations in Port-au-Prince is gathered from the **Humanitarian Data Exchange (HDX)**, specifically the **HOTOSM Haiti Education Facilities** dataset. These points provide the geographic coordinates of schools to be displayed on the project map.
