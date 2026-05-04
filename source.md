@@ -5,13 +5,15 @@
 The geographic boundary data (coordinates) for Haiti's borders and administrative levels (0–3) used in this project were retrieved from **OpenStreetMap (OSM)** using **Overpass Turbo**.
 
 ### Technical Note
-These coordinates are essential for rendering the interactive Haiti map required for the RFP. The administrative boundary files are stored in `data/borders/`.
+These coordinates are essential for rendering the interactive Haiti map required for the RFP.
 
 The data includes:
 - **Admin Level 0:** National borders
 - **Admin Level 1:** Departments
 - **Admin Level 2:** Arrondissements
 - **Admin Level 3:** Communes
+
+The administrative boundary files are stored in `data/borders/`.
 
 ## Population Density
 
