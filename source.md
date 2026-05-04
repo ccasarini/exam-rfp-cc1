@@ -9,7 +9,7 @@ During the research phase, several boundary sources were considered:
 - **Natural Earth** (Public domain map data)
 - **OpenStreetMap (OSM)**
 
-I chose **OpenStreetMap** because it offers the most up-to-date, community-driven administrative boundaries, which are frequently updated to reflect the local geographic reality in Haiti. The administrative boundary files are stored in `data/borders/`.
+I chose **OpenStreetMap** because it offers the most up-to-date, community-driven administrative boundaries, which are frequently updated to reflect the local geographic reality in Haiti. The administrative boundary files are stored in [data/borders/](data/borders/).
 
 The data includes:
 - **Admin Level 0:** National borders
@@ -52,4 +52,4 @@ For the analysis of armed conflict events, I researched several open-source data
 
 Among these options, I chose **UCDP GED** as the primary data source because of its **academic rigour and precision**. This dataset provides highly verified and reliable georeferenced information on conflict events, which is essential for a precise analysis of the security landscape in Haiti.
 
-The armed conflict files are stored in `data/armed_conflicts/`.
+The armed conflict files are stored in [data/armed_conflicts/](data/armed_conflicts/).
