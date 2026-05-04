@@ -346,6 +346,25 @@
                 conflictLayer = L.layerGroup();
                 allConflictData = Papa.parse(conflictRaw, { header: true, skipEmptyLines: true }).data;
 
+                // Helper for actor classification
+                function getActorLabel(name) {
+                    if (!name) return "Unknown";
+                    const n = name.toLowerCase();
+                    if (n.includes("government") || n.includes("police") || n.includes("pnh") || n.includes("state")) {
+                        return name + " (State Actor)";
+                    }
+                    if (n.includes("civilian")) {
+                        return name + " (Civilian Population)";
+                    }
+                    if (n.includes("gang") || n.includes("viv ansanm") || n.includes("g9") || n.includes("g-pep") || n.includes("mawozo") || n.includes("segond") || n.includes("taliban") || n.includes("ravine") || n.includes("baryè") || n.includes("terre noire")) {
+                        return name + " (Gang Group)";
+                    }
+                    if (n.includes("flrn") || n.includes("op lavalas") || n.includes("military faction")) {
+                        return name + " (Non-State Armed Group)";
+                    }
+                    return name;
+                }
+
                 function updateConflictMarkers(selectedYear) {
                     conflictLayer.clearLayers();
                     let count = 0;
@@ -375,10 +394,12 @@
                                 marker.on('click', function() {
                                     document.getElementById('details-section').querySelector('h3').innerHTML = category;
                                     document.getElementById('details-content').style.borderLeftColor = "#d32f2f";
+                                    const sideA = getActorLabel(row.side_a);
+                                    const sideB = getActorLabel(row.side_b);
                                     const html = `<div style="color: #d32f2f; font-weight: 800; margin-bottom: 12px; font-size: 1.2rem; line-height: 1.2;">Event Details</div>` +
                                                  `<div class="detail-item"><span class="detail-label">Date</span><span class="detail-value">${row.date_event ? row.date_event.split(' ')[0] : row.year}</span></div>` +
                                                  `<div class="detail-item"><span class="detail-label">Location</span><span class="detail-value">${row.where_coordinates || row.adm_2 || "Unknown"}</span></div>` +
-                                                 `<div class="detail-item"><span class="detail-label">Participants</span><span class="detail-value">${row.side_a} vs ${row.side_b || "Unknown"}</span></div>` +
+                                                 `<div class="detail-item"><span class="detail-label">Participants</span><span class="detail-value">${sideA} vs ${sideB}</span></div>` +
                                                  `<div class="detail-item"><span class="detail-label">Fatalities</span><span class="detail-value">${row.total_deaths_best_estimate || 0}</span></div>`;
                                     document.getElementById('details-content').innerHTML = html;
                                 });
