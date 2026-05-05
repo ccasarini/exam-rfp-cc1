@@ -5,7 +5,7 @@ This repository contains the data and processing pipeline for a geospatial analy
 
 ## Data Transformation Pipeline
 
-The data in this repository has been transformed through a multi-step pipeline to ensure precision and relevance to the educational sector in the Ouest department of Haiti.
+The data in this repository has been found through the data pipeline approach for the find and the get steps. While the data has been transformed and sometimes veryfied - the verify step -  with AI agent by creating the interactive Haiti map. 
 
 ### 1. Administrative Boundary Extraction
 The project focuses on the **Ouest** department and **Port-au-Prince**. 
