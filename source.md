@@ -35,7 +35,7 @@ For this project, which focuses on **education in armed conflict areas**, total 
 
 Since spatial age-disaggregated grids are often modeled at lower resolutions, I maintained the high-precision Kontur hexagonal grid and applied a demographic factor of **20.8%** to the total population counts. This percentage is derived from the **UN Population Prospects (2023/2024)** for Haiti, representing the estimated proportion of the population within the 6-15 age bracket. This ensures the map displays information directly relevant to the school-age population most impacted by conflict and educational disruption.
 
-The processed population density file for the Ouest department is stored in `data/population/ouest_population_400m.geojson`. For more detailed information on the dataset, you can explore the [data/population/](data/population/) folder.
+The processed population density file for the Ouest department is stored in `data/population_density/ouest_population_400m.geojson`. For more detailed information on the dataset, you can explore the [data/population_density/](data/population_density/) folder.
 
 
 ## School Locations
