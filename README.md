@@ -25,9 +25,21 @@ To focus on primary and secondary education, the full dataset of educational fac
 - **Output:** `data/schools/ouest_schools.geojson`.
 
 ### 4. Conflict Event Geoprocessing
-Raw conflict data from UCDP is processed to enable spatial analysis of fatalities and frequency.
+To analyze the security landscape, raw conflict data is transformed into a longitudinal dataset that supports trend analysis and spatial visualization.
 - **Source:** UCDP GED (Uppsala Conflict Data Program).
-- **Transformation:** `fetch_haiti_conflict_data.py` retrieves the data, and `convert_conflict_csv.py` transforms the cleaned CSV records into a GeoJSON format, preserving key metrics like fatality counts and event types for mapping.
+- **Temporal Scope:** Data spans from **1999 to 2024** (the latest available), enabling a sliding timeline to track conflict evolution and assist in forecasting potential future escalations.
+- **Geospatial Focus:** The analysis is localized to the **Ouest department**, capturing specific geocoded coordinates for each event.
+- **Data Attributes:** Each record includes detailed information on conflict **participants**, specific **locations**, and the **best estimate of fatalities**.
+- **AI-Driven Categorization:** By applying a custom classification algorithm (via Gemini) to raw media headlines, conflict events were grouped into 8 strategic categories:
+    1. Targeted Assassinations and Political Repression
+    2. Large-Scale Massacres and Neighborhood Raids
+    3. Police Operations and State Security Clashes
+    4. Inter-Gang Warfare (Inter-necine Conflict)
+    5. Kidnappings and Sexual Violence
+    6. Attacks on Strategic Infrastructure
+    7. Civil Unrest and Protests
+    8. Humanitarian Crisis and Mass Displacement.
+- **Transformation:** `fetch_haiti_conflict_data.py` retrieves the data, and `convert_conflict_csv.py` converts the processed records into a GeoJSON format for mapping.
 - **Output:** `data/armed_conflicts/ouest_conflict.geojson`.
 
 ---
