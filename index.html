@@ -169,9 +169,9 @@
 
     <div id="sidebar">
         <div class="sidebar-section">
-            <h2>Haiti Explorer</h2>
+            <h2>Haiti Strategic Risk and Infrastructure Overview</h2>
             <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Navigate between the national view and city-specific projects.</p>
-            <button id="project-button">click here to see the project</button>
+            <button id="project-button">Click here to see the project</button>
             
             <div id="timeline-container">
                 <div id="year-display">Year: 2024</div>
@@ -284,7 +284,7 @@
                     }
                 });
             
-            document.getElementById('project-button').innerHTML = "click here to see the project";
+            document.getElementById('project-button').innerHTML = "Click here to see the project";
         }
 
         function showProject() {
@@ -527,11 +527,11 @@
                 map.flyToBounds(combinedBounds, { padding: [50, 50], duration: 2, easeLinearity: 0.25 });
             });
             
-            document.getElementById('project-button').innerHTML = "back to national map";
+            document.getElementById('project-button').innerHTML = "Back to national map";
         }
 
         document.getElementById('project-button').onclick = function() {
-            if (this.innerHTML === "click here to see the project") {
+            if (this.innerHTML === "Click here to see the project") {
                 showProject();
             } else {
                 showHaiti();
