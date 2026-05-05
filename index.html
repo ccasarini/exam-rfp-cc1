@@ -422,7 +422,14 @@
 
                 // Process Armed Conflict Data
                 conflictLayer = L.layerGroup();
-                allConflictData = Papa.parse(conflictRaw, { header: true, skipEmptyLines: true }).data;
+                allConflictData = Papa.parse(conflictRaw, { 
+                    header: true, 
+                    skipEmptyLines: true,
+                    dynamicTyping: true,
+                    transformHeader: function(h) {
+                        return h.trim();
+                    }
+                }).data;
 
                 // Helper for actor classification
                 function getActorLabel(name) {
