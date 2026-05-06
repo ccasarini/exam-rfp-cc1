@@ -9,24 +9,24 @@ The data in this repository has been found through the data pipeline approach fo
 
 **Explore the Interactive Map:** [https://ccasarini.github.io/exam-rfp-cc1/](https://ccasarini.github.io/exam-rfp-cc1/)
 
-### 1. Administrative Boundary Extraction
+### 1. Administrative Boundary Data Extraction
 The project focuses on the **Ouest** department and **Port-au-Prince**. 
 - **Action:** Using `extract_city.py`, the Port-au-Prince commune was isolated from the national administrative level 2 (communes) dataset.
 - **Output:** `data/borders/port_au_prince.geojson`.
 
-### 2. Demographic Refinement (School-Age Population)
+### 2. Demographic Data - School-Age Population Density
 Raw population density data provides a total count, which is not specific enough for educational planning.
 - **Source:** Kontur Population (H3 Hexagonal Grid, 400m).
 - **Transformation:** The script `fetch_ouest_population.py` clips the national grid to the Ouest department and applies a demographic factor of **20.8%** (based on UN Population Prospects) to isolate children aged **6–15**.
 - **Output:** `data/population_density/ouest_population_400m.geojson`.
 
-### 3. Infrastructural Categorization
+### 3. Educational Infrastructure Data
 To focus on primary and secondary education, the full dataset of educational facilities required rigorous filtering.
 - **Source:** HOTOSM Haiti Education Facilities via HDX.
 - **Transformation:** `fetch_schools.py` filters facilities by amenity type (`school`, `college`) and excludes keywords related to universities or kindergartens. It also standardizes school names and clips the results to the Ouest department.
 - **Output:** `data/schools/ouest_schools.geojson`.
 
-### 4. Conflict Event Geoprocessing
+### 4. Armed Conflict Events Data
 To analyze the security landscape, raw conflict data is transformed into a longitudinal dataset that supports trend analysis and spatial visualization.
 - **Source:** UCDP GED (Uppsala Conflict Data Program).
 - **Temporal Scope:** Data spans from **2017 to 2024** (the latest available), enabling a sliding timeline to track conflict evolution and assist in forecasting potential future escalations.
