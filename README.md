@@ -29,7 +29,7 @@ To focus on primary and secondary education, the full dataset of educational fac
 ### 4. Conflict Event Geoprocessing
 To analyze the security landscape, raw conflict data is transformed into a longitudinal dataset that supports trend analysis and spatial visualization.
 - **Source:** UCDP GED (Uppsala Conflict Data Program).
-- **Temporal Scope:** Data spans from **1999 to 2024** (the latest available), enabling a sliding timeline to track conflict evolution and assist in forecasting potential future escalations.
+- **Temporal Scope:** Data spans from **2017 to 2024** (the latest available), enabling a sliding timeline to track conflict evolution and assist in forecasting potential future escalations.
 - **Geospatial Focus:** The analysis is localized to the **Ouest department**, capturing specific geocoded coordinates for each event.
 - **Data Attributes:** Each record includes detailed information on conflict **participants**, specific **locations**, and the **best estimate of fatalities**.
 - **AI-Driven Categorization:** By applying a custom classification algorithm (via Gemini) to raw media headlines, conflict events were grouped into 8 strategic categories:
