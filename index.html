@@ -485,7 +485,7 @@
                 });
 
                 var combinedBounds = primaryLayer.getBounds().extend(secondaryLayer.getBounds()).extend(popLayer.getBounds());
-                map.flyToBounds(combinedBounds, { padding: [50, 50], duration: 2, easeLinearity: 0.25 });
+                map.fitBounds(combinedBounds, { padding: [50, 50] });
             });
         }
 
