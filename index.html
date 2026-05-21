@@ -182,7 +182,6 @@
         <div class="sidebar-section" id="details-section" style="display: none;">
             <h3>Information Details</h3>
             <div id="details-content" class="details-box">
-                Use the <strong>Layer Control</strong> to toggle schools and conflict data. Click markers for details.
             </div>
         </div>
     </div>
@@ -191,8 +190,8 @@
     <div id="map"></div>
 
     <script>
-        // 5. Create the map and set a starting view near Haiti immediately
-        var map = L.map('map').setView([18.9, -72.3], 7);
+        // 5. Create the map and set a starting view on Port-au-Prince immediately
+        var map = L.map('map').setView([18.55, -72.3], 12);
         
         // --- STEP 1: Create a custom pane for labels ---
         map.createPane('labels');
@@ -261,7 +260,7 @@
             document.getElementById('map-title').style.display = 'block';
             document.getElementById('timeline-container').style.display = 'block';
             document.getElementById('map-title').innerHTML = "West Department and the Port-au-Prince Metropolitan Area";
-            document.getElementById('details-content').innerHTML = "Use the <strong>Layer Control</strong> (bottom-left) to toggle schools and conflict data. Use the <strong>Timeline Slider</strong> to filter events by year.";
+            document.getElementById('details-content').innerHTML = "Click on a marker or a population cell to see specific details here.";
 
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
             const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
