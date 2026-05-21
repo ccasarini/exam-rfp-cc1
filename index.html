@@ -170,8 +170,6 @@
     <div id="sidebar">
         <div class="sidebar-section">
             <h2>Haiti Armed Conflict Risk and Education Infrastructure Overview</h2>
-            <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Navigate between the national view and city-specific projects.</p>
-            <button id="project-button">Click here to see the project</button>
             
             <div id="timeline-container">
                 <div id="year-display">Year: 2017</div>
@@ -210,16 +208,8 @@
         var popLegend;      // NEW: Legend for Population
         var allConflictData = [];
         var layerControl;   
-        var isFirstLoad = true;
 
         // --- STEP 2: Refine Styles ---
-        var haitiStyle = {
-            color: "#999",
-            weight: 0.5,
-            fillColor: "#e8f5e9", 
-            fillOpacity: 0.8
-        };
-
         var primaryMarkerStyle = {
             radius: 6,
             fillColor: "#ff9800", 
@@ -250,42 +240,6 @@
             maxZoom: 20,
             pane: 'labels'
         }).addTo(map);
-
-        function showHaiti() {
-            if (currentLayer) map.removeLayer(currentLayer);
-            if (landBordersLayer) map.removeLayer(landBordersLayer);
-            if (primaryLayer) map.removeLayer(primaryLayer);
-            if (secondaryLayer) map.removeLayer(secondaryLayer);
-            if (conflictLayer) map.removeLayer(conflictLayer);
-            if (popLayer) map.removeLayer(popLayer);
-            if (popLegend) {
-                map.removeControl(popLegend);
-                popLegend = null;
-            }
-            if (layerControl) {
-                map.removeControl(layerControl);
-                layerControl = null;
-            }
-            
-            document.getElementById('details-section').style.display = 'none';
-            document.getElementById('map-title').style.display = 'none';
-            document.getElementById('timeline-container').style.display = 'none';
-
-            fetch('data/borders/hti_admin0.geojson')
-                .then(res => res.json())
-                .then(data => {
-                    currentLayer = L.geoJSON(data, { style: haitiStyle }).addTo(map);
-                    
-                    if (isFirstLoad) {
-                        map.fitBounds(currentLayer.getBounds(), { padding: [20, 20] });
-                        isFirstLoad = false;
-                    } else {
-                        map.flyToBounds(currentLayer.getBounds(), { padding: [50, 50], duration: 2, easeLinearity: 0.25 });
-                    }
-                });
-            
-            document.getElementById('project-button').innerHTML = "Click here to see the project";
-        }
 
         function showProject() {
             if (currentLayer) map.removeLayer(currentLayer);
@@ -533,19 +487,9 @@
                 var combinedBounds = primaryLayer.getBounds().extend(secondaryLayer.getBounds()).extend(popLayer.getBounds());
                 map.flyToBounds(combinedBounds, { padding: [50, 50], duration: 2, easeLinearity: 0.25 });
             });
-            
-            document.getElementById('project-button').innerHTML = "Back to national map";
         }
 
-        document.getElementById('project-button').onclick = function() {
-            if (this.innerHTML === "Click here to see the project") {
-                showProject();
-            } else {
-                showHaiti();
-            }
-        };
-
-        showHaiti();
+        showProject();
     </script>
 </body>
 </html>
