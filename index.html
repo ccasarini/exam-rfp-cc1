@@ -69,26 +69,6 @@
             color: #222;
         }
         
-        /* 4. Interactive button in Sidebar */
-        #project-button {
-            width: 100%;
-            padding: 14px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        #project-button:hover {
-            background-color: #555;
-            transform: translateY(-1px);
-        }
-
         /* Conflict Marker Style */
         .conflict-icon-container {
             background: transparent !important;
@@ -182,6 +162,7 @@
         <div class="sidebar-section" id="details-section" style="display: none;">
             <h3>Information Details</h3>
             <div id="details-content" class="details-box">
+                Click on a marker or a population cell to see specific details here.
             </div>
         </div>
     </div>
@@ -190,44 +171,14 @@
     <div id="map"></div>
 
     <script>
-        // 5. Create the map and set a starting view on Port-au-Prince immediately
+        // 1. Initialize Map
         var map = L.map('map').setView([18.6, -72.3], 11);
         
-        // --- STEP 1: Create a custom pane for labels ---
         map.createPane('labels');
         map.getPane('labels').style.zIndex = 1000;
         map.getPane('labels').style.pointerEvents = 'none';
 
-        var currentLayer;
-        var landBordersLayer;
-        var primaryLayer;   
-        var secondaryLayer; 
-        var conflictLayer;  
-        var popLayer;       // NEW: Population Layer
-        var popLegend;      // NEW: Legend for Population
-        var allConflictData = [];
-        var layerControl;   
-
-        // --- STEP 2: Refine Styles ---
-        var primaryMarkerStyle = {
-            radius: 6,
-            fillColor: "#ff9800", 
-            color: "#fff",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.8
-        };
-
-        var secondaryMarkerStyle = {
-            radius: 6,
-            fillColor: "#5d4037", 
-            color: "#fff",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.9
-        };
-
-        // --- STEP 3: Add Base Layers ---
+        // Base Layers
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap',
             subdomains: 'abcd',
@@ -240,252 +191,147 @@
             pane: 'labels'
         }).addTo(map);
 
-        function showProject() {
-            if (currentLayer) map.removeLayer(currentLayer);
-            if (landBordersLayer) map.removeLayer(landBordersLayer);
-            if (primaryLayer) map.removeLayer(primaryLayer);
-            if (secondaryLayer) map.removeLayer(secondaryLayer);
-            if (conflictLayer) map.removeLayer(conflictLayer);
-            if (popLayer) map.removeLayer(popLayer);
-            if (popLegend) {
-                map.removeControl(popLegend);
-                popLegend = null;
+        // Global Variables
+        var allConflictData = [];
+        var conflictLayer = L.layerGroup().addTo(map);
+        var popLegend = L.control({position: 'bottomright'});
+        var layerControl = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' }).addTo(map);
+
+        // Styles
+        var primaryMarkerStyle = { radius: 6, fillColor: "#ff9800", color: "#fff", weight: 1, opacity: 1, fillOpacity: 0.8 };
+        var secondaryMarkerStyle = { radius: 6, fillColor: "#5d4037", color: "#fff", weight: 1, opacity: 1, fillOpacity: 0.9 };
+
+        // Helper Functions
+        function getPopColor(d) {
+            return d > 1000 ? '#006d2c' : d > 200 ? '#41ab5d' : d > 20 ? '#a1d99b' : d > 2 ? '#e5f5e0' : '#f7fcf5';
+        }
+
+        popLegend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend'), grades = [0, 2, 20, 200, 1000];
+            div.innerHTML = '<div class="legend-title">Children Population<br><small>(Ages 6-15, per 400m)</small></div>';
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML += '<i style="background:' + getPopColor(grades[i] + 1) + '"></i> ' + grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
             }
-            if (layerControl) {
-                map.removeControl(layerControl);
-                layerControl = null;
-            }
+            return div;
+        };
 
-            document.getElementById('details-section').style.display = 'block';
-            document.getElementById('map-title').style.display = 'block';
-            document.getElementById('timeline-container').style.display = 'block';
-            document.getElementById('map-title').innerHTML = "West Department and the Port-au-Prince Metropolitan Area";
-            document.getElementById('details-content').innerHTML = "Click on a marker or a population cell to see specific details here.";
+        function getCategory(headline) {
+            headline = (headline || "").toLowerCase();
+            if (headline.includes("shot dead") || headline.includes("murdered") || headline.includes("assassination") || headline.includes("journalist killed") || headline.includes("student shot") || headline.includes("mechanic shot") || headline.includes("abattu") || headline.includes("tué") || headline.includes("assassinat") || headline.includes("repression") || headline.includes("execution") || headline.includes("beheaded") || headline.includes("decapitation")) return "Targeted Assassinations and Political Repression";
+            if (headline.includes("massacre") || headline.includes("carnage") || headline.includes("raid") || headline.includes("houses set on fire") || headline.includes("fires") || headline.includes("incendie") || headline.includes("corpses") || headline.includes("cadavres") || headline.includes("bodies found") || headline.includes("mass killings")) return "Large-Scale Massacres and Neighborhood Raids";
+            if (headline.includes("police operation") || headline.includes("opération de la pnh") || headline.includes("clash with the police") || headline.includes("pnh regains control") || headline.includes("pnh killed") || headline.includes("pnh report") || headline.includes("agents of haitian anti-gang police unit killed") || headline.includes("bandits shot dead") || headline.includes("repels attack") || headline.includes("stronghold") || headline.includes("police raid")) return "Police Operations and State Security Clashes";
+            if (headline.includes("gang war") || headline.includes("gang vs gang") || headline.includes("clash between armed gangs") || headline.includes("viv ansanm") || headline.includes("g9") || headline.includes("g-pep") || headline.includes("armed clashes") || headline.includes("gang leader killed") || headline.includes("gang leader injured") || headline.includes("fury of the armed gangs") || headline.includes("gang coalition") || headline.includes("bandits routed") || headline.includes("gangs unleash") || headline.includes("gangs target") || headline.includes("gang attacks") || headline.includes("armed groups")) return "Inter-Gang Warfare (Inter-necine Conflict)";
+            if (headline.includes("kidnapped") || headline.includes("kidnapping") || headline.includes("hostage") || headline.includes("rape") || headline.includes("viol") || headline.includes("tortured")) return "Kidnappings and Sexual Violence";
+            if (headline.includes("national palace") || headline.includes("prison") || headline.includes("jailbreak") || headline.includes("penitentiary") || headline.includes("hospital") || headline.includes("airport") || headline.includes("ship") || headline.includes("centre-ville") || headline.includes("city center") || headline.includes("police station") || headline.includes("commissariat") || headline.includes("sous-commissariat")) return "Attacks on Strategic Infrastructure";
+            if (headline.includes("demonstration") || headline.includes("protest") || headline.includes("manifestation") || headline.includes("popular mobilization") || headline.includes("unrest") || headline.includes("riots")) return "Civil Unrest and Protests";
+            if (headline.includes("flee") || headline.includes("displacement") || headline.includes("trapped") || headline.includes("evacuation") || headline.includes("homeless") || headline.includes("refugee") || headline.includes("fuite")) return "Humanitarian Crisis and Mass Displacement";
+            return "Armed Conflict Event";
+        }
 
-            const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
-            const loadLines = fetch('data/borders/hti_adminlines.geojson').then(r => r.json());
-            const loadSchools = fetch('data/schools/ouest_schools.geojson').then(r => r.json());
-            const loadConflicts = fetch('data/armed_conflicts/haiti_ucdp_conflict_cleaned.csv').then(r => r.text());
-            const loadPopulation = fetch('data/population_density/ouest_population_400m.geojson').then(r => r.json());
+        function getActorLabel(name) {
+            if (!name) return "Unknown";
+            const n = name.toLowerCase();
+            if (n.includes("government") || n.includes("police") || n.includes("pnh") || n.includes("state")) return name + " (State Actor)";
+            if (n.includes("civilian")) return name + " (Civilian Population)";
+            if (n.includes("gang") || n.includes("viv ansanm") || n.includes("g9") || n.includes("g-pep") || n.includes("mawozo") || n.includes("segond") || n.includes("taliban") || n.includes("ravine") || n.includes("baryè") || n.includes("terre noire")) return name + " (Gang Group)";
+            if (n.includes("flrn") || n.includes("op lavalas") || n.includes("military faction")) return name + " (Non-State Armed Group)";
+            return name;
+        }
 
-            Promise.all([loadPaup, loadLines, loadSchools, loadConflicts, loadPopulation]).then(([paupData, linesData, schoolData, conflictRaw, popData]) => {
-                currentLayer = L.geoJSON(paupData, { 
-                    style: { color: "transparent", fillColor: "transparent" } 
-                }).addTo(map);
-
-                // --- POPULATION LAYER LOGIC ---
-                function getPopColor(d) {
-                    // Adjusted brackets for 6-15 age group (approx 20% of total)
-                    return d > 1000 ? '#006d2c' :
-                           d > 200  ? '#41ab5d' :
-                           d > 20   ? '#a1d99b' :
-                           d > 2    ? '#e5f5e0' :
-                                      '#f7fcf5';
-                }
-
-                function popStyle(feature) {
-                    return {
-                        fillColor: getPopColor(feature.properties.population),
-                        weight: 0.1,
-                        opacity: 1,
-                        color: 'white',
-                        fillOpacity: 0.7
-                    };
-                }
-
-                popLayer = L.geoJSON(popData, {
-                    style: popStyle,
-                    onEachFeature: function(feature, layer) {
-                        layer.bindTooltip("Ages 6-15: " + Math.round(feature.properties.population) + " children", { sticky: true });
+        function updateConflictMarkers(selectedYear) {
+            conflictLayer.clearLayers();
+            let count = 0;
+            allConflictData.forEach(function(row) {
+                if (row.year && parseInt(row.year) === parseInt(selectedYear)) {
+                    var lat, lon;
+                    if (row.geom_wkt) {
+                        var coords = row.geom_wkt.match(/POINT\s*\(([-\d.]+)\s+([-\d.]+)\)/);
+                        if (coords) { lon = parseFloat(coords[1]); lat = parseFloat(coords[2]); }
                     }
-                }).addTo(map);
-
-                // --- POPULATION LEGEND ---
-                popLegend = L.control({position: 'bottomright'});
-                popLegend.onAdd = function (map) {
-                    var div = L.DomUtil.create('div', 'info legend'),
-                        grades = [0, 2, 20, 200, 1000],
-                        labels = [];
-                    div.innerHTML = '<div class="legend-title">Children Population<br><small>(Ages 6-15, per 400m)</small></div>';
-                    for (var i = 0; i < grades.length; i++) {
-                        div.innerHTML +=
-                            '<i style="background:' + getPopColor(grades[i] + 1) + '"></i> ' +
-                            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                    if (lat && lon) {
+                        count++;
+                        var category = getCategory(row.source_headline);
+                        var marker = L.marker([lat, lon], {
+                            icon: L.divIcon({ className: 'conflict-icon-container', html: '<div class="conflict-diamond"></div>', iconSize: [12, 12], iconAnchor: [6, 6] })
+                        });
+                        marker.on('click', function() {
+                            document.getElementById('details-section').querySelector('h3').innerHTML = category;
+                            document.getElementById('details-content').style.borderLeftColor = "#d32f2f";
+                            const sideA = getActorLabel(row.side_a), sideB = getActorLabel(row.side_b);
+                            document.getElementById('details-content').innerHTML = `<div style="color: #d32f2f; font-weight: 800; margin-bottom: 12px; font-size: 1.2rem; line-height: 1.2;">Event Details</div>` +
+                                `<div class="detail-item"><span class="detail-label">Date</span><span class="detail-value">${row.date_event ? row.date_event.split(' ')[0] : row.year}</span></div>` +
+                                `<div class="detail-item"><span class="detail-label">Location</span><span class="detail-value">${row.where_coordinates || row.adm_2 || "Unknown"}</span></div>` +
+                                `<div class="detail-item"><span class="detail-label">Participants</span><span class="detail-value">${sideA} vs ${sideB}</span></div>` +
+                                `<div class="detail-item"><span class="detail-label">Fatalities</span><span class="detail-value">${row.total_deaths_best_estimate || 0}</span></div>`;
+                        });
+                        marker.addTo(conflictLayer);
                     }
-                    return div;
-                };
-                popLegend.addTo(map);
+                }
+            });
+            document.getElementById('event-count').innerHTML = count + " events found in " + selectedYear;
+        }
 
-                landBordersLayer = L.geoJSON(linesData, {
-                    filter: function(feature) { return feature.properties.adm_level === 2; },
-                    style: { color: "#999", weight: 0.8, opacity: 0.8 }
-                }).addTo(map);
-
-                function createSchoolLayer(data, amenityType, style, label) {
-                    return L.geoJSON(data, {
-                        filter: function(feature) { return feature.properties.amenity === amenityType; },
-                        pointToLayer: function (feature, latlng) { return L.circleMarker(latlng, style); },
-                        onEachFeature: function (feature, layer) {
-                            layer.on('click', function() {
-                                const props = feature.properties;
-                                document.getElementById('details-section').querySelector('h3').innerHTML = "Institution Details";
-                                document.getElementById('details-content').style.borderLeftColor = style.fillColor;
-                                const html = `<div style="color: ${style.fillColor}; font-weight: 800; margin-bottom: 12px; font-size: 1.2rem; line-height: 1.2;">${props.name || "Unnamed School"}</div>` +
-                                             `<div class="detail-item"><span class="detail-label">Type</span><span class="detail-value">${label}</span></div>` +
-                                             `<div class="detail-item"><span class="detail-label">OSM ID</span><span class="detail-value">${props.osm_id || "N/A"}</span></div>` +
-                                             `<div class="detail-item"><span class="detail-label">Coordinates</span><span class="detail-value">${feature.geometry.coordinates[1].toFixed(4)}, ${feature.geometry.coordinates[0].toFixed(4)}</span></div>`;
-                                document.getElementById('details-content').innerHTML = html;
-                            });
-                        }
+        function createSchoolLayer(data, amenityType, style, label) {
+            return L.geoJSON(data, {
+                filter: function(feature) { return feature.properties.amenity === amenityType; },
+                pointToLayer: function (feature, latlng) { return L.circleMarker(latlng, style); },
+                onEachFeature: function (feature, layer) {
+                    layer.on('click', function() {
+                        const props = feature.properties;
+                        document.getElementById('details-section').querySelector('h3').innerHTML = "Institution Details";
+                        document.getElementById('details-content').style.borderLeftColor = style.fillColor;
+                        document.getElementById('details-content').innerHTML = `<div style="color: ${style.fillColor}; font-weight: 800; margin-bottom: 12px; font-size: 1.2rem; line-height: 1.2;">${props.name || "Unnamed School"}</div>` +
+                            `<div class="detail-item"><span class="detail-label">Type</span><span class="detail-value">${label}</span></div>` +
+                            `<div class="detail-item"><span class="detail-label">OSM ID</span><span class="detail-value">${props.osm_id || "N/A"}</span></div>` +
+                            `<div class="detail-item"><span class="detail-label">Coordinates</span><span class="detail-value">${feature.geometry.coordinates[1].toFixed(4)}, ${feature.geometry.coordinates[0].toFixed(4)}</span></div>`;
                     });
                 }
-
-                primaryLayer = createSchoolLayer(schoolData, 'school', primaryMarkerStyle, 'Primary / Fundamental').addTo(map);
-                secondaryLayer = createSchoolLayer(schoolData, 'college', secondaryMarkerStyle, 'Secondary / College').addTo(map);
-
-                // Helper for categorization
-                function getCategory(headline) {
-                    headline = (headline || "").toLowerCase();
-                    if (headline.includes("shot dead") || headline.includes("murdered") || headline.includes("assassination") || headline.includes("journalist killed") || headline.includes("student shot") || headline.includes("mechanic shot") || headline.includes("abattu") || headline.includes("tué") || headline.includes("assassinat") || headline.includes("repression") || headline.includes("execution") || headline.includes("beheaded") || headline.includes("decapitation")) {
-                        return "Targeted Assassinations and Political Repression";
-                    }
-                    if (headline.includes("massacre") || headline.includes("carnage") || headline.includes("raid") || headline.includes("houses set on fire") || headline.includes("fires") || headline.includes("incendie") || headline.includes("corpses") || headline.includes("cadavres") || headline.includes("bodies found") || headline.includes("mass killings")) {
-                        return "Large-Scale Massacres and Neighborhood Raids";
-                    }
-                    if (headline.includes("police operation") || headline.includes("opération de la pnh") || headline.includes("clash with the police") || headline.includes("pnh regains control") || headline.includes("pnh killed") || headline.includes("pnh report") || headline.includes("agents of haitian anti-gang police unit killed") || headline.includes("bandits shot dead") || headline.includes("repels attack") || headline.includes("stronghold") || headline.includes("police raid")) {
-                        return "Police Operations and State Security Clashes";
-                    }
-                    if (headline.includes("gang war") || headline.includes("gang vs gang") || headline.includes("clash between armed gangs") || headline.includes("viv ansanm") || headline.includes("g9") || headline.includes("g-pep") || headline.includes("armed clashes") || headline.includes("gang leader killed") || headline.includes("gang leader injured") || headline.includes("fury of the armed gangs") || headline.includes("gang coalition") || headline.includes("bandits routed") || headline.includes("gangs unleash") || headline.includes("gangs target") || headline.includes("gang attacks") || headline.includes("armed groups")) {
-                        return "Inter-Gang Warfare (Inter-necine Conflict)";
-                    }
-                    if (headline.includes("kidnapped") || headline.includes("kidnapping") || headline.includes("hostage") || headline.includes("rape") || headline.includes("viol") || headline.includes("tortured")) {
-                        return "Kidnappings and Sexual Violence";
-                    }
-                    if (headline.includes("national palace") || headline.includes("prison") || headline.includes("jailbreak") || headline.includes("penitentiary") || headline.includes("hospital") || headline.includes("airport") || headline.includes("ship") || headline.includes("centre-ville") || headline.includes("city center") || headline.includes("police station") || headline.includes("commissariat") || headline.includes("sous-commissariat")) {
-                        return "Attacks on Strategic Infrastructure";
-                    }
-                    if (headline.includes("demonstration") || headline.includes("protest") || headline.includes("manifestation") || headline.includes("popular mobilization") || headline.includes("unrest") || headline.includes("riots")) {
-                        return "Civil Unrest and Protests";
-                    }
-                    if (headline.includes("flee") || headline.includes("displacement") || headline.includes("trapped") || headline.includes("evacuation") || headline.includes("homeless") || headline.includes("refugee") || headline.includes("fuite")) {
-                        return "Humanitarian Crisis and Mass Displacement";
-                    }
-                    return "Armed Conflict Event";
-                }
-
-                // Process Armed Conflict Data
-                conflictLayer = L.layerGroup();
-                allConflictData = Papa.parse(conflictRaw, { 
-                    header: true, 
-                    skipEmptyLines: true,
-                    dynamicTyping: true,
-                    transformHeader: function(h) {
-                        return h.trim();
-                    }
-                }).data;
-
-                // Helper for actor classification
-                function getActorLabel(name) {
-                    if (!name) return "Unknown";
-                    const n = name.toLowerCase();
-                    if (n.includes("government") || n.includes("police") || n.includes("pnh") || n.includes("state")) {
-                        return name + " (State Actor)";
-                    }
-                    if (n.includes("civilian")) {
-                        return name + " (Civilian Population)";
-                    }
-                    if (n.includes("gang") || n.includes("viv ansanm") || n.includes("g9") || n.includes("g-pep") || n.includes("mawozo") || n.includes("segond") || n.includes("taliban") || n.includes("ravine") || n.includes("baryè") || n.includes("terre noire")) {
-                        return name + " (Gang Group)";
-                    }
-                    if (n.includes("flrn") || n.includes("op lavalas") || n.includes("military faction")) {
-                        return name + " (Non-State Armed Group)";
-                    }
-                    return name;
-                }
-
-                function updateConflictMarkers(selectedYear) {
-                    conflictLayer.clearLayers();
-                    let count = 0;
-                    allConflictData.forEach(function(row) {
-                        if (row.year && parseInt(row.year) === parseInt(selectedYear)) {
-                            var lat, lon;
-                            if (row.geom_wkt) {
-                                var coords = row.geom_wkt.match(/POINT\s*\(([-\d.]+)\s+([-\d.]+)\)/);
-                                if (coords) {
-                                    lon = parseFloat(coords[1]);
-                                    lat = parseFloat(coords[2]);
-                                }
-                            }
-                            
-                            if (lat && lon) {
-                                count++;
-                                var category = getCategory(row.source_headline);
-                                var marker = L.marker([lat, lon], {
-                                    icon: L.divIcon({ 
-                                        className: 'conflict-icon-container',
-                                        html: '<div class="conflict-diamond"></div>',
-                                        iconSize: [12, 12],
-                                        iconAnchor: [6, 6]
-                                    })
-                                });
-
-                                marker.on('click', function() {
-                                    document.getElementById('details-section').querySelector('h3').innerHTML = category;
-                                    document.getElementById('details-content').style.borderLeftColor = "#d32f2f";
-                                    const sideA = getActorLabel(row.side_a);
-                                    const sideB = getActorLabel(row.side_b);
-                                    const html = `<div style="color: #d32f2f; font-weight: 800; margin-bottom: 12px; font-size: 1.2rem; line-height: 1.2;">Event Details</div>` +
-                                                 `<div class="detail-item"><span class="detail-label">Date</span><span class="detail-value">${row.date_event ? row.date_event.split(' ')[0] : row.year}</span></div>` +
-                                                 `<div class="detail-item"><span class="detail-label">Location</span><span class="detail-value">${row.where_coordinates || row.adm_2 || "Unknown"}</span></div>` +
-                                                 `<div class="detail-item"><span class="detail-label">Participants</span><span class="detail-value">${sideA} vs ${sideB}</span></div>` +
-                                                 `<div class="detail-item"><span class="detail-label">Fatalities</span><span class="detail-value">${row.total_deaths_best_estimate || 0}</span></div>`;
-                                    document.getElementById('details-content').innerHTML = html;
-                                });
-                                marker.addTo(conflictLayer);
-                            }
-                        }
-                    });
-                    document.getElementById('event-count').innerHTML = count + " events found in " + selectedYear;
-                }
-
-                // Initialize slider
-                const slider = document.getElementById('timeline-slider');
-                const yearDisplay = document.getElementById('year-display');
-                slider.oninput = function() {
-                    yearDisplay.innerHTML = "Year: " + this.value;
-                    updateConflictMarkers(this.value);
-                };
-
-                // Initial render for the first year on the slider
-                updateConflictMarkers(slider.value);
-                conflictLayer.addTo(map);
-
-                var overlays = {
-                    "<span style='color: #2e7d32; font-weight: bold;'>Population Density</span>": popLayer,
-                    "<span style='color: #ff9800; font-weight: bold;'>Primary Schools</span>": primaryLayer,
-                    "<span style='color: #5d4037; font-weight: bold;'>Secondary Schools</span>": secondaryLayer,
-                    "<span style='color: #000; font-weight: bold;'>Armed Conflict</span>": conflictLayer
-                };
-                layerControl = L.control.layers(null, overlays, { 
-                    collapsed: false,
-                    position: 'bottomleft'
-                }).addTo(map);
-
-                // Handle legend visibility when layer is toggled
-                map.on('overlayadd', function (eventLayer) {
-                    if (eventLayer.name.includes("Population Density")) {
-                        popLegend.addTo(map);
-                    }
-                });
-                map.on('overlayremove', function (eventLayer) {
-                    if (eventLayer.name.includes("Population Density")) {
-                        map.removeControl(popLegend);
-                    }
-                });
             });
         }
 
-        showProject();
+        // 2. Incremental Data Loading
+        document.getElementById('details-section').style.display = 'block';
+        document.getElementById('map-title').style.display = 'block';
+        document.getElementById('timeline-container').style.display = 'block';
+
+        // Admin Borders (Background)
+        fetch('data/borders/port_au_prince.geojson').then(r => r.json()).then(data => {
+            L.geoJSON(data, { style: { color: "transparent", fillColor: "transparent" } }).addTo(map);
+        });
+
+        fetch('data/borders/hti_adminlines.geojson').then(r => r.json()).then(data => {
+            L.geoJSON(data, { filter: (f) => f.properties.adm_level === 2, style: { color: "#999", weight: 0.8, opacity: 0.8 } }).addTo(map);
+        });
+
+        // Population Density
+        fetch('data/population_density/ouest_population_400m.geojson').then(r => r.json()).then(data => {
+            var popLayer = L.geoJSON(data, {
+                style: (f) => ({ fillColor: getPopColor(f.properties.population), weight: 0.1, opacity: 1, color: 'white', fillOpacity: 0.7 }),
+                onEachFeature: (f, l) => l.bindTooltip("Ages 6-15: " + Math.round(f.properties.population) + " children", { sticky: true })
+            }).addTo(map);
+            layerControl.addOverlay(popLayer, "<span style='color: #2e7d32; font-weight: bold;'>Population Density</span>");
+            popLegend.addTo(map);
+            
+            map.on('overlayadd', (e) => { if (e.name.includes("Population Density")) popLegend.addTo(map); });
+            map.on('overlayremove', (e) => { if (e.name.includes("Population Density")) map.removeControl(popLegend); });
+        });
+
+        // Schools
+        fetch('data/schools/ouest_schools.geojson').then(r => r.json()).then(data => {
+            var primaryLayer = createSchoolLayer(data, 'school', primaryMarkerStyle, 'Primary / Fundamental').addTo(map);
+            var secondaryLayer = createSchoolLayer(data, 'college', secondaryMarkerStyle, 'Secondary / College').addTo(map);
+            layerControl.addOverlay(primaryLayer, "<span style='color: #ff9800; font-weight: bold;'>Primary Schools</span>");
+            layerControl.addOverlay(secondaryLayer, "<span style='color: #5d4037; font-weight: bold;'>Secondary Schools</span>");
+        });
+
+        // Armed Conflict
+        fetch('data/armed_conflicts/haiti_ucdp_conflict_cleaned.csv').then(r => r.text()).then(csv => {
+            allConflictData = Papa.parse(csv, { header: true, skipEmptyLines: true, dynamicTyping: true, transformHeader: (h) => h.trim() }).data;
+            const slider = document.getElementById('timeline-slider');
+            slider.oninput = function() { document.getElementById('year-display').innerHTML = "Year: " + this.value; updateConflictMarkers(this.value); };
+            updateConflictMarkers(slider.value);
+            layerControl.addOverlay(conflictLayer, "<span style='color: #000; font-weight: bold;'>Armed Conflict</span>");
+        });
     </script>
 </body>
 </html>
