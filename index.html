@@ -191,7 +191,7 @@
 
     <script>
         // 5. Create the map and set a starting view on Port-au-Prince immediately
-        var map = L.map('map').setView([18.55, -72.3], 12);
+        var map = L.map('map').setView([18.6, -72.3], 11);
         
         // --- STEP 1: Create a custom pane for labels ---
         map.createPane('labels');
@@ -482,9 +482,6 @@
                         map.removeControl(popLegend);
                     }
                 });
-
-                var combinedBounds = primaryLayer.getBounds().extend(secondaryLayer.getBounds()).extend(popLayer.getBounds());
-                map.fitBounds(combinedBounds, { padding: [50, 50] });
             });
         }
 
