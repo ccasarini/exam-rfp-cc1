@@ -34,113 +34,15 @@
         #map { flex-grow: 1; height: 100vh; position: relative; }
         
         /* Sidebar Content */
-        h2 { color: #1a1a1a; margin-top: 0; font-size: 1.6rem; border-bottom: 3px solid #e8f5e9; padding-bottom: 12px; font-weight: 800; }
-        h3 { font-size: 1.25rem; color: #333; margin-top: 15px; margin-bottom: 12px; font-weight: 700; line-height: 1.4; }
-        .sidebar-section { margin-bottom: 25px; }
-        .details-box {
-            background-color: #ffffff;
-            padding: 18px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            min-height: 120px;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #444;
-            overflow-y: auto;
-            max-height: 350px;
-            border-left: 5px solid #333; /* Default accent */
-        }
-        
-        .detail-item {
-            margin-bottom: 8px;
-            display: flex;
-            flex-direction: column;
-        }
-        .detail-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #888;
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
-        .detail-value {
-            font-weight: 500;
-            color: #222;
-        }
-        
-        /* 4. Interactive button in Sidebar */
-        #project-button {
-            width: 100%;
-            padding: 14px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        #project-button:hover {
-            background-color: #555;
-            transform: translateY(-1px);
-        }
-
-        /* Conflict Marker Style */
-        .conflict-icon-container {
-            background: transparent !important;
-            border: none !important;
-        }
-        .conflict-diamond {
-            background-color: #000;
-            transform: rotate(45deg);
-            border: 1px solid #fff;
-            width: 10px;
-            height: 10px;
-            box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-            margin: 1px;
-        }
-
-        /* Timeline Slider Styles */
-        #timeline-container {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f0f0f0;
-            border-radius: 8px;
-            display: none;
-        }
-        #timeline-slider {
-            width: 100%;
-            cursor: pointer;
-        }
-        #year-display {
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #d32f2f;
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        /* Right side title */
-        #map-title {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 1500;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px 25px;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #333;
-            display: none; /* Hidden by default */
-            pointer-events: none;
-            border-left: 5px solid #ff9800;
+        h2 { 
+            color: #1a1a1a; 
+            margin-top: 0; 
+            font-size: 1.4rem; 
+            border-bottom: 4px solid #333; 
+            padding-bottom: 15px; 
+            font-weight: 800; 
+            line-height: 1.3;
+            letter-spacing: -0.5px;
         }
         /* Legend Styles */
         .info.legend {
@@ -187,7 +89,6 @@
         </div>
     </div>
 
-    <div id="map-title">Port-au-Prince (Haiti): An Overview of Armed Conflict Risk and Education Infrastructure (2017–2024)</div>
     <div id="map"></div>
 
     <script>
@@ -258,9 +159,7 @@
             }
 
             document.getElementById('details-section').style.display = 'block';
-            document.getElementById('map-title').style.display = 'block';
             document.getElementById('timeline-container').style.display = 'block';
-            document.getElementById('map-title').innerHTML = "Port-au-Prince (Haiti): An Overview of Armed Conflict Risk and Education Infrastructure (2017–2024)";
             document.getElementById('details-content').innerHTML = "Click on a marker or a population cell to see specific details here.";
 
             const loadPaup = fetch('data/borders/port_au_prince.geojson').then(r => r.json());
