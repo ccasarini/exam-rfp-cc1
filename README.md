@@ -1,4 +1,5 @@
 # Strengthening Education Continuity in Conflict-Affected Regions
+Last updated: May 26, 2026.
 ## Response to EBI RFP: A Scalable Strategy for Educational Continuity - Master ICT4D 2026
 
 This repository contains the data and processing pipeline for a geospatial analysis aimed at protecting educational access in Haiti. By integrating high-resolution population data, school locations, and conflict event tracking, this project identifies critical areas where armed conflict threatens the continuity of learning.
